@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ../themes/themes.html %>
+
+  <!-- build:css ../styles/blog.css -->
+  <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.css" />
+  <link href="../bower_components/SyntaxHighlighter/styles/shCore.css" rel="stylesheet">
+  <link href="../bower_components/SyntaxHighlighter/styles/shCoreRDark.css" rel="stylesheet">
+  <!-- endbuild -->
+
+</head>
+<body ng-app="hopefutureBlogApp" ng-controller="HopefutureBlogCtrl">
+<% include ../views/common/header.html %>
+<% include ../views/blog/blog.html %>
+<% include ../views/common/footer.html %>
+
+<!-- build:js ../scripts/vendor-blog.js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!--校验国际化 -->
+<script src="../bower_components/jquery-validation/src/localization/messages_zh.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../scripts/syntaxhighlighter.js -->
+<script src="../bower_components/SyntaxHighlighter/scripts/XRegExp.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shCore.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shAutoloader.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushXml.js"></script>
+
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushAppleScript.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushAS3.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushBash.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushColdFusion.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushCpp.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushCSharp.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushCss.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushDelphi.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushDiff.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushErlang.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushGroovy.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushJava.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushJavaFX.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushJScript.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushPerl.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushPhp.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushPlain.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushPython.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushPowerShell.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushRuby.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushSass.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushScala.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushSql.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushVb.js"></script>
+<script src="../bower_components/SyntaxHighlighter/scripts/shBrushXml.js"></script>
+
+<!-- endbuild -->
+
+<!-- build:js ../scripts/blog.js -->
+<script src="../scripts/hopefuture/hf_validate.js"></script>
+<script src="../scripts/apps/blog/app-blog.js"></script>
+
+<script src="../scripts/services/httpInterceptor.js"></script>
+<script src="../scripts/services/service-hopefuture-blog.js"></script>
+<script src="../scripts/services/blog/service-blog.js"></script>
+<script src="../scripts/services/errorCodes.js"></script>
+
+<script src="../scripts/controllers/controller-common.js"></script>
+<script src="../scripts/controllers/controller-hopefuture-blog.js"></script>
+<script src="../scripts/controllers/blog/controller-blog.js"></script>
+<script src="../scripts/controllers/blog/controller-articles.js"></script>
+<script src="../scripts/controllers/blog/controller-article.js"></script>
+<script src="../scripts/controllers/blog/controller-archive.js"></script>
+<script src="../scripts/controllers/blog/controller-category.js"></script>
+<script src="../scripts/controllers/blog/controller-label.js"></script>
+<script src="../scripts/controllers/blog/controller-resource.js"></script>
+
+<script src="../scripts/directives/blog/directive-blog.js"></script>
+<script src="../scripts/directives/blog/directive-article.js"></script>
+
+<!-- endbuild -->
+
+<script src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+<script src="http://static.bshare.cn/b/bshareC0.js"></script>
+</body>
+</html>

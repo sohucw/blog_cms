@@ -1,0 +1,152 @@
+<div class="ng-hide" ng-show="showArticleInfo">
+  <article class="article-info">
+    <h4 class="link">
+      <span class="glyphicon glyphicon-calendar"></span>
+      {{article.createdDate}}
+    </h4>
+
+    <h2>
+      <a ng-href="#/article/{{article._id}}">{{article.title}}</a>
+    </h2>
+
+    <section>
+
+      <!--<div class="article-reproduced">-->
+        <!--转载请标注出处：  <a ng-href="{{articleLink}}">{{articleLink}}</a>-->
+      <!--</div>-->
+
+      <div class="clearfix">
+        <div class="pull-left">分享到：</div>
+        <div class="pull-left">
+          <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+            <a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a>
+            <a title="分享到网易微博" class="bshare-neteasemb"></a>
+            <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+            <span class="BSHARE_COUNT bshare-share-count">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div ng-switch="article.catalogue">
+          <div ng-switch-when="true" generate-catalogue></div>
+          <div ng-switch-when="false" class="article-content" ng-bind-html="article.content"></div>
+      </div>
+      <!--/.blog-content -->
+    </section>
+
+    <aside class="article-meta"></aside>
+
+  </article>
+
+  <div class="navigation-post">
+    <ul class="pager">
+      <li class="previous" ng-if="prevArticle">
+        <a ng-href="{{prevArticle.articleLink}}">
+          <span class="glyphicon glyphicon-chevron-left"></span> {{prevArticle.title}}
+        </a>
+      </li>
+      <li class="next" ng-if="nextArticle">
+        <a ng-href="{{nextArticle.articleLink}}">
+          {{nextArticle.title}} <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="panel panel-primary" ng-if="relatedArticle.length>0;">
+    <div class="panel-heading">
+      <h3 class="panel-title">相关文章</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="related-article">
+        <li ng-repeat="article in relatedArticle">
+          <a class="pull-left" ng-href="{{article.articleLink}}">{{article.title}}</a>
+          <span class="pull-right">{{article.createdDate}}</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="blog-comment">
+    <h3>评论</h3>
+    <hr/>
+    <div id="commentList"></div>
+
+    <div id="commentFormContainer">
+      <div class="panel panel-primary comment-panel" id="commentFormPanel">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            发表评论
+            <button type="button" class="close ng-hide" title="取消回复" ng-click="cancelReply();" ng-show="isReply">&times;</button>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form name="commentForm" comment-validator="validator">
+            <div class="form-group">
+              <textarea rows="5" class="form-control" ng-model="comment.content" name="content" required></textarea>
+            </div>
+
+            <div class="row commentator-panel" ng-if="!logined">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="commentator"><i class="required">*</i> 昵称</label>
+                  <input type="text" placeholder="请输入昵称或姓名" id="commentator" name="commentator" class="form-control"
+                         ng-model="comment.commentator" required=""
+                         maxlength="100"/>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="email"><i class="required">*</i> Email</label>
+                  <input type="email" placeholder="请输入您的email，方便交流" id="email" name="email" class="form-control" ng-model="comment.email"
+                         required=""
+                         maxlength="100"/>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="site">个人博客或站点</label>
+                  <input type="text" id="site" name="site" class="form-control" ng-model="comment.site" maxlength="100"/>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn btn-primary" type="button" ng-click="publishComment();">发表评论</button>
+              <button ng-click="cancelReply();" type="button" class="btn btn-default ng-hide" ng-show="isReply">取消回复</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--/.blog-comment -->
+</div>
+
+<script type="text/ng-template" id="protectedPasswordModal.html">
+  <form class="form-horizontal" name="protectedPasswordForm" protected-validator>
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel()" title="Close">&times;</button>
+      <h4 class="modal-title">该文章需要输入密码才能查看</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="protectedPassword" class="col-sm-2 control-label"><i class="required">*</i> 文章密码</label>
+
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="protectedPassword" name="protectedPassword" ng-model="protected.password" required>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">确定</button>
+      <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+  </form>
+</script>
+
+<!--页面加载后，滚动条滑到最上面-->
+<div class="sr-only" scroll-top></div>

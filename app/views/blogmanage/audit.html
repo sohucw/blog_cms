@@ -1,0 +1,78 @@
+<h3 class="page-header">文章审核</h3>
+<div class="blog-btn-group">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" ng-click="delete();">
+      <span class="glyphicon glyphicon-remove"></span> 删除
+    </button>
+  </div>
+
+
+  <div class="btn-group blog-search-text">
+    <div class="input-group has-success">
+      <input type="text" placeholder="搜索文章" class="form-control" ng-model="searchContent">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" ng-click="search();">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+    </div>
+  </div>
+
+</div>
+<hr/>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th style="width: 3%;"><input type="checkbox" ng-model="grid.checked" ng-change="selectAll()"/></th>
+    <th style="width: 4%;">&nbsp;</th>
+    <th style="width: 20%;">标题</th>
+    <th style="width: 8%;">作者</th>
+    <th style="width: 10%;">分类</th>
+    <th style="width: 10%;">标签</th>
+    <th style="width: 5%;">置顶</th>
+    <th style="width: 7%;">浏览次数</th>
+    <th style="width: 5%;">评论</th>
+    <th style="width: 12%;">创建日期</th>
+    <th style="width: 8%;">首页显示</th>
+    <th style="width: 8%;">首页置顶</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="item in items" id="{{item._id}}">
+    <td><input type="checkbox" ng-model="item.checked" ng-change="selectItem()"/></td>
+    <td>
+      <a class="glyphicon glyphicon-trash" href="" ng-click="delete(item);"></a>
+    </td>
+    <td>
+      <div popover="{{item.title}}" popover-trigger="mouseenter" popover-popup-delay="300">
+        <a ng-href="/{{item.account}}#/article/{{item._id}}" target="_blank">{{item.title | truncate:50:true:' ...'}}</a>
+      </div>
+    </td>
+    <td>{{item.account}}</td>
+    <td>{{item.categories | arrayToStr:'、':'未分类' | truncate:40:true:' ...'}}</td>
+    <td>{{item.labels | arrayToStr:'、':'—' | truncate:40:true:' ...'}}</td>
+    <td>{{item.top?'是':'否'}}</td>
+    <td>{{item.readCounts}}</td>
+    <td>{{item.commentCounts}}</td>
+    <td>{{item.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+    <td><button class="btn btn-primary btn-xs" ng-click="changeBoutique(item);">{{item.boutique?'是':'否'}}</button></td>
+    <td><button class="btn btn-primary btn-xs" ng-click="changeHomeTop(item);">{{item.homeTop?'是':'否'}}</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-9">
+    <pagination total-items="totalItems" ng-model="page.currentPage" items-per-page="itemsPerPage" max-size="maxSize"
+                boundary-links="true" num-pages="numPages" ng-change="loadPageData()"></pagination>
+  </div>
+
+  <div class="col-sm-3">
+    <ul class="pagination pull-right">
+      <li class="active">
+        <a>总记录数：{{totalItems}} / 总页数：{{numPages}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

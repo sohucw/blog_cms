@@ -1,0 +1,145 @@
+<div ng-controller="BlogCtrl" ng-init="logined = <%= locals.logined %>;loginName = '<%= locals.loginName %>';development = <%= locals.development %>;">
+  <div class="jumbotron">
+    <div class="container">
+      <h1>我的博客</h1>
+
+      <p ng-bind="blog.account.signature"></p>
+
+      <p><a href="mailto:{{blog.account.email}}">联系我</a></p>
+    </div>
+  </div>
+  <!--/.jumbotron -->
+
+  <div class="container-fluid blog-container">
+
+    <div class="row">
+
+      <section class="col-lg-9 col-md-8 col-sm-7 section">
+        <div ng-if="logined">
+          <div class="clearfix">
+            <button class="btn btn-link btn-lg pull-right" type="button" ng-click="manageBlog();">
+              <span class="glyphicon glyphicon-cog"></span>
+              管理我的博客
+            </button>
+            <button class="btn btn-link btn-lg pull-right" type="button" ng-click="createBlog();">
+              <span class="glyphicon glyphicon-plus"></span>
+              发表新文章
+            </button>
+          </div>
+          <hr/>
+        </div>
+
+        <!-- 文章信息：根据不同的路由显示不同的内容，文章列表，文章信息等等 -->
+        <div ng-view>
+
+        </div>
+      </section>
+
+      <aside class="col-lg-3 col-md-4 col-sm-5 article-aside-panel">
+        <div class="input-group has-success">
+          <input type="text" class="form-control" placeholder="Search">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+        </div>
+
+        <div>
+          <h3>关于作者</h3>
+
+          <p><span title="头像" class="{{blog.account.headPortrait}}"></span></p>
+
+          <p>昵称：<span ng-bind="blog.account.name"></span></p>
+
+          <p>性别：<span ng-bind="blog.account.sex"></span></p>
+
+          <p>英文名：<span ng-bind="blog.account.englishName"></span></p>
+
+          <p>漂泊地：<span ng-bind="blog.account.residence"></span></p>
+
+          <p>职位：<span ng-bind="blog.account.position"></span></p>
+
+          <p>email：<span ng-bind="blog.account.email"></span></p>
+        </div>
+
+        <div class="article-aside">
+          <h3>最热文章</h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="article in blog.hotArticles">
+              <span class="fa fa-file-o"></span>
+              <a ng-href="#/article/{{article._id}}" ng-bind="article.title"></a>
+              - <span ng-bind="article.readCounts||0"></span> views
+            </li>
+          </ol>
+        </div>
+
+        <div class="article-aside">
+          <h3>近期文章</h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="article in blog.recentArticles">
+              <span class="fa fa-file-o"></span>
+              <a ng-href="#/article/{{article._id}}" ng-bind="article.title"></a>
+              - <span ng-bind="article.createdDate"></span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="article-aside">
+          <h3>文章归档</h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="archive in blog.articlesArchive">
+              <span class="fa fa-folder-open-o"></span>
+              <a ng-href="#/archive/{{archive._id}}" ng-bind="archive.month"></a> （<span ng-bind="archive.articleCount"></span>）
+            </li>
+          </ol>
+        </div>
+
+        <div class="article-aside">
+          <h3>分类目录</h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="category in blog.categories">
+              <span class="fa fa-folder-open-o"></span>
+              <a ng-href="#/category/{{category._id}}" ng-bind="category.name"></a>
+              （<span ng-bind="category.count"></span>）
+            </li>
+          </ol>
+        </div>
+
+        <div class="article-aside">
+          <h3>标签</h3>
+
+          <div class="element-list clearfix" ng-if="blog.labels.length>0">
+            <a ng-href="#/label/{{label._id}}" ng-repeat="label in blog.labels" ng-style="label.style" ng-bind="label.name"></a>
+          </div>
+        </div>
+
+        <div class="article-aside">
+          <h3>近期评论</h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="comment in blog.comments">
+              <span class="fa fa-comment-o"></span>
+              {{comment.commentator}} 评论了
+              《<a ng-href="#/article/{{comment.articleID}}" ng-bind="comment.articleTitle"></a>》
+            </li>
+          </ol>
+        </div>
+
+        <div class="article-aside">
+          <h3><a ng-href="#/resource">资源链接</a></h3>
+          <ol class="list-unstyled article-list-aside">
+            <li ng-repeat="resource in blog.resources">
+              <a target="_blank" ng-href="{{resource.link}}" ng-bind="resource.name"></a>
+            </li>
+          </ol>
+          <div class="text-right" ng-if="blog.resources.length>0"><a ng-href="#/resource">更多...</a></div>
+        </div>
+      </aside>
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+
+</div>
+
+<a class="back-to-top btn btn-primary" href="" title="返回顶部">返回顶部</a>

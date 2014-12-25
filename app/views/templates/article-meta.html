@@ -1,0 +1,23 @@
+<ul class="list-unstyled clearfix">
+  <li>
+    <span class="fa fa-comment" title="评论"></span>
+    <span title="文章《{{article.title}}》的评论数">{{article.commentCount || 0}} 条评论</span>
+  </li>
+  <li ng-if="article.categories">
+    <span class="glyphicon glyphicon-folder-close" title="分类目录"></span>
+    <a ng-href="#/category/{{category._id}}" ng-repeat="category in article.categories" title="查看分类目录 {{category.name}} 中的全部文章" href="">{{category.name}}</a>
+  </li>
+  <li ng-if="article.labels">
+    <span class="glyphicon glyphicon-tags" title="标签"></span>
+    <a ng-href="#/label/{{label._id}}" ng-repeat="label in article.labels" title="查看标签 {{label.name}} 中的全部文章" href="">{{label.name}}</a>
+  </li>
+  <li>
+    <span class="fa fa-eye" title="浏览次数"></span>
+    浏览次数 {{article.readCounts || 0}}
+  </li>
+
+  <!--<li>-->
+    <!--<span class="glyphicon glyphicon-user"></span>-->
+    <!--<a ng-href="/{{article.account}}" href="">{{article.account}}</a>-->
+  <!--</li>-->
+</ul>

@@ -1,0 +1,33 @@
+<!-- Fixed navbar -->
+<header class="navbar navbar-inverse navbar-fixed-top blog-header" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand <% if (locals.mainPage) { %>active<% } %>" href="/">首页</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="<% if (locals.reference) { %>active<% } %>"><a target="_blank" ng-href="/reference">学习参考</a></li>
+        <li class="<% if (locals.donatePage) { %>active<% } %>"><a target="_blank" ng-href="/donate">爱心捐助</a></li>
+        <li class="<% if (locals.aboutPage) { %>active<% } %>"><a target="_blank" ng-href="/about">关于</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if (locals.logined) { %>
+        <li><a ng-href="/<%= locals.loginName %>/manage#/accountInfo">欢迎 <%= locals.loginName %></a></li>
+        <li class="<% if (locals.personalBlogPage) { %>active<% } %>"><a href="" ng-href="/<%= locals.loginName %>">我的博客</a></li>
+        <li><a href="" ng-href="/<%= locals.loginName %>/manage#/setting">换肤</a></li>
+        <!-- 这里进入后台管理自己的博客-->
+        <li><a href="" ng-href="/logout">退出</a></li>
+        <% }else { %>
+        <li class="<% if (locals.loginPage) { %>active<% } %>"><a ng-href="/login">登录</a></li>
+        <li class="<% if (locals.signupPage) { %>active<% } %>"><a href="" ng-href="/signup">注册</a></li>
+        <% } %>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</header>

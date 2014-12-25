@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>错误页面</title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ../themes/themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp">
+<% include ../views/common/header.html %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+      <h1>错误页面 <span>:(</span></h1>
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+      <pre><%= error.stack %></pre>
+    </div>
+  </div>
+</div>
+<% include ../views/common/footer.html %>
+
+<!-- build:js ../scripts/vendor-error.js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../scripts/error.js -->
+<script src="../scripts/apps/app-hopefuture.js"></script>
+<!-- endbuild -->
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>eonasdan-bootstrap-datetimepicker demo</title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="../../app/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+  <style>
+    body{
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class='col-sm-6'>
+      <div class="form-group">
+        <div class='input-group' id="dateTimePicker">
+          <input type='text' class="form-control" data-date-format="YYYY-MM-DD HH:mm"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-info">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../../app/bower_components/moment/moment.js"></script>
+<script src="../../app/bower_components/moment/locale/zh-cn.js"></script>
+<script src="../../app/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script>
+  $(function () {
+    $('#dateTimePicker').datetimepicker({
+      minDate: '2014-08-14',
+      sideBySide: true
+    });
+
+//      pickDate: true,                 //en/disables the date picker，默认 true
+//      pickTime: true,                 //en/disables the time picker，默认 true
+//      useMinutes: true,               //en/disables the minutes picker 是否可以改变分钟 ，默认 true
+//      useSeconds: true,               //en/disables the seconds picker 是否显示秒并改变秒 ，默认 false
+//      useCurrent: true,               //when true, picker will set the value to the current date/time
+//      minuteStepping:1,               //set the minute stepping
+//      minDate:`1/1/1900`,               //set a minimum date 设置最小时间，比如 new Date()
+//    maxDate: ,     //set a maximum date (defaults to today +100 years) 设置最大时间
+//    showToday: true,                 //shows the today indicator,默认true
+//      language:'en',                  //sets language locale
+//      defaultDate:"",                 //sets a default date, accepts js dates, strings and moment objects
+//      disabledDates:[],               //an array of dates that cannot be selected
+//      enabledDates:[],                //an array of dates that can be selected
+//      icons = {
+//        time: 'glyphicon glyphicon-time',
+//        date: 'glyphicon glyphicon-calendar',
+//        up:   'glyphicon glyphicon-chevron-up',
+//        down: 'glyphicon glyphicon-chevron-down'
+//      }
+//    useStrict: false,               //use "strict" when validating dates
+//      sideBySide: false,              //show the date and time picker side by side     date 和time 显示在一起
+//      daysOfWeekDisabled:[]
+  });
+</script>
+</body>
+</html>

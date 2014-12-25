@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>markdown 编辑器</title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="../../app/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet">
+  <link href="markdown.css" rel="stylesheet">
+</head>
+<body>
+  <div class="markdow-toolbar">
+    <i class="fa fa-bold"></i>
+
+  </div>
+
+<div class="container-fluid markdown-container">
+  <div class="row">
+    <div class="col-sm-6 markdow-editor">
+      <textarea id="content" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="col-sm-6 markdow-preview">
+      <div id="preview"></div>
+    </div>
+  </div>
+
+</div>
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/markdown/lib/markdown.js"></script>
+<script>
+  $(function () {
+    $('#content').keyup(function(){
+      var val = $(this).val();
+      $('#preview').html(markdown.toHTML(val));
+    });
+  });
+</script>
+</body>
+</html>

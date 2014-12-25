@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>带目录的文章</title>
+  <link href="../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <style>
+
+    .article-catalogue {
+      position: fixed;
+      top: 20px;
+      right: 200px;
+      opacity: 0.8;
+    }
+
+    .article-catalogue .nav > li > a {
+      display: block;
+      padding: 4px 20px;
+      color: #999;
+    }
+
+    .article-catalogue .nav > li > a:hover,
+    .article-catalogue .nav > li > a:focus {
+      padding-left: 19px;
+      color: #563d7c;
+      background-color: transparent;
+      border-left: 1px solid #563d7c;
+    }
+
+    .article-catalogue .nav > .active > a,
+    .article-catalogue .nav > .active:hover > a,
+    .article-catalogue .nav > .active:focus > a {
+      padding-left: 18px;
+      font-weight: 700;
+      color: #563d7c;
+      background-color: transparent;
+      border-left: 2px solid #563d7c
+    }
+
+    .article-catalogue .nav .nav {
+      display: none;
+      padding-left: 1.5em;
+      padding-bottom: 10px;
+    }
+
+    .article-catalogue .nav .nav > li > a {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+
+    .article-catalogue .nav > .active > ul {
+      display: block;
+    }
+
+    /*目录号*/
+    .article-catalogue .nav {
+      counter-reset: catalogue1;
+    }
+
+    .article-catalogue .nav > li > a:before {
+      content: counter(catalogue1, decimal) ". ";
+      counter-increment: catalogue1;
+      font-weight: bold;
+    }
+
+    .article-catalogue .nav .nav {
+      counter-reset: catalogue2;
+    }
+
+    .article-catalogue .nav .nav > li > a:before {
+      content: counter(catalogue1, decimal) "." counter(catalogue2, decimal) ". ";
+      counter-increment: catalogue2;
+    }
+
+    .article-catalogue .nav .nav .nav {
+      counter-reset: catalogue3;
+    }
+
+    .article-catalogue .nav .nav .nav > li > a:before {
+      content: counter(catalogue1, decimal) "." counter(catalogue2, decimal) "." counter(catalogue3, decimal) ". ";
+      counter-increment: catalogue3;
+    }
+
+    .article-catalogue .nav .nav .nav .nav {
+      counter-reset: catalogue4;
+    }
+
+    .article-catalogue .nav .nav .nav .nav > li > a:before {
+      content: counter(catalogue1, decimal) "." counter(catalogue2, decimal) "." counter(catalogue3, decimal) "." counter(catalogue4, decimal) ". ";
+      counter-increment: catalogue4;
+    }
+
+    .article-catalogue .nav .nav .nav .nav .nav {
+      counter-reset: catalogue5;
+    }
+
+    .article-catalogue .nav .nav .nav .nav .nav > li > a:before {
+      content: counter(catalogue1, decimal) "." counter(catalogue2, decimal) "." counter(catalogue3, decimal) "." counter(catalogue4, decimal) "." counter(catalogue5, decimal) ". ";
+      counter-increment: catalogue5;
+    }
+
+    .article-catalogue .nav .nav .nav .nav .nav .nav {
+      counter-reset: catalogue6;
+    }
+
+    .article-catalogue .nav .nav .nav .nav .nav .nav > li > a:before {
+      content: counter(catalogue1, decimal) "." counter(catalogue2, decimal) "." counter(catalogue3, decimal) "." counter(catalogue4, decimal) "." counter(catalogue5, decimal) "." counter(catalogue6, decimal) ". ";
+      counter-increment: catalogue6;
+    }
+
+
+  </style>
+</head>
+<body>
+
+
+<div class="container">
+  <h1>最多支持六级，h1到h6</h1>
+
+  <div style="margin-bottom: 10px;">
+    <textarea name="cataloguesHtml" id="cataloguesHtml" cols="100" rows="10"></textarea>
+  </div>
+  <div>
+    <button class="btn btn-primary" id="createCode">生成目录和对应的文章内容</button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="article-content">
+        <h2 data-target="catalog-0">其他栏目</h2>
+
+        <h1 data-target="catalog-1">一级栏目1</h1>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h2 data-target="catalog-1-0">二级栏目1</h2>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h3 data-target="catalog-1-0-0">三级栏目1</h3>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h4 data-target="catalog-1-0-0-0">四级栏目1</h4>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h5 data-target="catalog-1-0-0-0-0">五级栏目1</h5>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h6 data-target="catalog-1-0-0-0-0-0">六级栏目1</h6>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h6 data-target="catalog-1-0-0-0-0-1">六级栏目2</h6>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h5 data-target="catalog-1-0-0-0-1">五级栏目2</h5>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h4 data-target="catalog-1-0-0-1">四级栏目2</h4>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h3 data-target="catalog-1-0-1">三级栏目2</h3>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h2 data-target="catalog-1-1">二级栏目2</h2>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h1 data-target="catalog-2">一级栏目2</h1>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h1 data-target="catalog-3">一级栏目3</h1>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="article-catalogue">
+    <ul class="nav">
+      <li><a href="" data-target="catalog-0">其他栏目</a></li>
+      <li><a href="" data-target="catalog-1">一级栏目1</a>
+        <ul class="nav">
+          <li><a href="" data-target="catalog-1-0">二级栏目1</a>
+            <ul class="nav">
+              <li><a href="" data-target="catalog-1-0-0">三级栏目1</a>
+                <ul class="nav">
+                  <li><a href="" data-target="catalog-1-0-0-0">四级栏目1</a>
+                    <ul class="nav">
+                      <li><a href="" data-target="catalog-1-0-0-0-0">五级栏目1</a>
+                        <ul class="nav">
+                          <li><a href="" data-target="catalog-1-0-0-0-0-0">六级栏目1</a></li>
+                          <li><a href="" data-target="catalog-1-0-0-0-0-1">六级栏目2</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="" data-target="catalog-1-0-0-0-1">五级栏目2</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="" data-target="catalog-1-0-0-1">四级栏目2</a></li>
+                </ul>
+              </li>
+              <li><a href="" data-target="catalog-1-0-1">三级栏目2</a></li>
+            </ul>
+          </li>
+          <li><a href="" data-target="catalog-1-1">二级栏目2</a></li>
+        </ul>
+      </li>
+      <li><a href="" data-target="catalog-2">一级栏目2</a></li>
+      <li><a href="" data-target="catalog-3">一级栏目3</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<script src="../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="带目录的文章.js"></script>
+</body>
+</html>

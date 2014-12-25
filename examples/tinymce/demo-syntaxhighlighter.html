@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link href="../../app/bower_components/SyntaxHighlighter/styles/shCore.css" rel="stylesheet">
+  <link href="../../app/bower_components/SyntaxHighlighter/styles/shThemeMidnight.css" rel="stylesheet">
+
+  <style>
+    /** 解决与Bootstrap冲突**/
+    .syntaxhighlighter table td.code .container:before{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div>
+
+<pre class="brush: javascript; first-line: 10; pad-line-numbers: 3; tab-size: 20; font-size: '30px'; highlight: [4,5,54]; title: Title; ">
+/**
+ * Created by linder on 2014/7/7.
+ */
+// https://github.com/linder0209
+(function ($, undefined) {
+      'use strict';
+
+  var re = /\{\{:([\w-]+)\}\}/g;
+  // 该方法支持键值即json格式的数据
+  function applyTemplate(template, values) {
+    return template.replace(re, function (m, name) {
+      return values[name] !== undefined ? values[name] : '';
+    });
+  }
+
+  function getSelectedData(data) {
+    var selectedData = [];
+    var _data = $.extend([], data);
+    $.each(_data, function (index, item) {
+      if (item.selected) {
+        selectedData.push(item);
+      }
+    });
+    return selectedData;
+  }
+
+  var getPath = (function () {
+    var src = $('script[src*="schedule.js"]').attr('src');
+    var index = src.indexOf('schedule.js');
+    var path = src.substring(0, index);
+    return path;
+  })();
+
+  var componentName = 'schedulePicker';
+  var today = moment();
+  var defaults = {
+    date: today,
+    style: {
+      selected: 'selected',
+      active: 'active',
+      weekend: 'weekend',
+      itemActive: 'act',
+      itemAppointed: 'act2'
+    },
+    plugins: undefined,//插件必须是字符串或字符串组成的数组，需要实现方法 loadPlugin
+    onClickSave: undefined,
+    onClickClear: undefined
+  };
+
+  var componentTmpl;
+  var generatedIds = 0;
+
+  $.fn[componentName] = function (options) {
+
+    var component = $(this).data(componentName);
+
+    if (component) {
+      return component;
+    }
+
+    return this.each(function () {
+      var api;
+      var settings = $.extend(true, {}, defaults, options);
+      var picker = $(this);
+      var activeDate = settings.date;
+      if (typeof activeDate === 'string') {
+        activeDate = moment(activeDate);
+      }
+      var calendarItemData = [];//当天日程数据
+      var editStatus = true; //编辑状态
+      var calendarItemChanged = false;//当前数据是否已变化
+      var relatedElements = {};//相关元素
+
+      if (!componentTmpl) {//加载模板，只加载一次
+        $.ajax({
+          url: settings.tmplUrl || (getPath + 'templates/schedule-tmpl.html'),
+          async: false,
+          dataType: 'text',
+          success: function (content) {
+            componentTmpl = content;
+          }
+        });
+      }
+
+      //渲染当月日期
+      var renderDays = function (step) {
+        if (step) {
+          activeDate.add('M', step);
+        }
+        var a = activeDate.clone();
+        a.startOf('month').startOf('isoWeek');
+        var b = a.clone().add('d', 42);
+        var html = '';
+        var isNext = false;
+
+        while (a &lt; b) {
+          var classes = [];
+          if (a.weekday() === 6 || a.weekday() === 0) {//周末
+            classes.push(settings.style.weekend);
+          }
+          if (a.month() !== activeDate.month()) {
+            classes.push(isNext ? 'next' : 'prev');
+          } else {
+            isNext = true;
+          }
+          html += '&lt;span data-day="' + a.format('YYYY-MM-DD') + '" class="' + classes.join(' ') + '"&gt;' + a.date() + '&lt;/span&gt;';
+          a.add('d', 1);
+        }
+        return html;
+      };
+
+      //渲染当天时段
+      var renderCalendarItems = function () {
+        var tmpl = '&lt;li&gt;&lt;div data-calendar-item="{{:itemIndex}}" row="{{:row}}" col="{{:col}}" class="calendar-item-inner"&gt;{{:timePeriod}}&lt;/div&gt;&lt;/li&gt;',
+          val,
+          nextVal,
+          html = '',
+          start ,
+          end,
+          row = 0,
+          col = 0;
+        for (var i = 0; i &lt; 48; i++) {
+          val = i / 2;
+          nextVal = val + 1;
+          val = val &lt; 10 ? ('0' + val) : val;
+          nextVal = nextVal &lt; 10 ? ('0' + nextVal) : nextVal;
+
+          if (i % 2 === 0) {
+            start = val + ':00';
+            end = val + ':30';
+            val += ':00';
+          } else {
+            start = val + ':30';
+            end = nextVal + ':00';
+            val = '';
+          }
+          row = parseInt(i / 12);
+          col = i % 12;
+
+          html += applyTemplate(tmpl, {timePeriod: val, itemIndex: i, row: row, col: col});
+          calendarItemData.push({
+            index: i,
+            start: start,
+            end: end,
+            status: '',
+            selected: false
+          });
+        }
+        return html;
+      };
+
+      /**
+       * 点击前一个月后一个月重新渲染
+       * @param step
+       */
+      var reRender = function (step) {
+        var fn = function () {
+          var html = renderDays(step);
+          picker.find('[data-days]').empty().html(html);
+          picker.find('[data-current-date]').html(activeDate.format('YYYY年M月'));
+          picker.find('[data-current-ymd]').html(activeDate.format('YYYY年M月D日'));
+
+          //clearData();
+          //加载数据
+//          if (settings.events &amp;&amp; $.isFunction(settings.events)) {
+//            settings.events(activeDate.format('YYYY-MM'), activeDate.format('YYYY-MM-DD'), loadData);
+//          }
+        };
+
+        if (calendarItemChanged === true) {
+          if (!relatedElements.scheduleConfirm) {
+            //创建确认提示对话框
+            relatedElements.scheduleConfirm = $('#scheduleConfirmDialog');
+            relatedElements.scheduleConfirm.on('click', '[data-dialog-action]', function (e) {
+              e.preventDefault();
+              var action = $(e.currentTarget).attr('data-dialog-action');
+              switch (action) {
+                case 'close':
+                  break;
+                case 'yes':
+                  if (settings.onClickSave &amp;&amp; $.isFunction(settings.onClickSave)) {
+                    settings.onClickSave(activeDate.format('YYYY-MM'), activeDate.format('YYYY-MM-DD'), getSelectedData(calendarItemData), function () {
+                      calendarItemChanged = false;
+                    });
+                  }
+                  fn();
+                  calendarItemChanged = false;
+                  break;
+                case 'no':
+                  fn();
+                  calendarItemChanged = false;
+                  break;
+              }
+              relatedElements.scheduleConfirm.hide();
+            });
+          }
+          relatedElements.scheduleConfirm.show();
+          return;
+        } else {
+          fn();
+        }
+
+      };
+
+      //创建相关元素
+      var createElement = function () {
+        var el = $('&lt;div id="tooltip' + generatedIds++ + '" class="tooltip" style="display:none;"/&gt;').appendTo(document.body);
+        el.html('该时段已被预约，不可取消设置');
+        relatedElements.appointedTooltip = el;
+        $(document.body).on('click', function () {
+          el.hide();
+        });
+      };
+
+      //初始化相关事件
+      var initEvent = function () {
+        //前或后一个月
+        picker.on('click', '[data-prev-next]', function (e) {
+          var el = $(e.currentTarget);
+          if (el.attr('data-prev-next') === 'prev') {
+            reRender(-1);
+          } else {
+            reRender(1);
+          }
+        });
+
+        //当前天
+        picker.on('click', '[data-day]', function (e) {
+          var el = $(e.currentTarget);
+          if(el.hasClass('prev') || el.hasClass('next')){
+            return;
+          }
+          var currentDay = el.attr('data-day');
+          activeDate = moment(currentDay);
+          clearData();
+          //加载数据
+          if (settings.events &amp;&amp; $.isFunction(settings.events)) {
+            settings.events(activeDate.format('YYYY-MM'), currentDay, loadData);
+          }
+        });
+
+        // 当日时段日程
+        picker.on('click', '[data-calendar-item]', function (e) {
+          var el = $(e.currentTarget);
+          var index = el.attr('data-calendar-item');
+          if (calendarItemData[index].status === 'appointed') {
+            e.stopPropagation();
+            var offset = el.offset(),
+              width = el.width(),
+              height = el.height();
+            relatedElements.appointedTooltip.css({
+              top: offset.top + height / 2 - 15,
+              left: offset.left + width - 5
+            }).show();
+            return;
+          }
+          var selected = calendarItemData[index].selected;
+          el[selected ? 'removeClass' : 'addClass'](settings.style.itemActive);
+          calendarItemData[index].selected = !selected;
+          calendarItemChanged = true;
+        });
+
+        //选择当日全部时段
+        picker.on('change', '[data-select-all]', function (e) {
+          var el = $(e.currentTarget);
+          var checked = el.prop('checked');
+          var item;
+          for (var i = 0, len = calendarItemData.length; i &lt; len; i++) {
+            item = calendarItemData[i];
+            if (item.status !== 'appointed') {
+              picker.find('[data-calendar-item]')[checked ? 'addClass' : 'removeClass'](settings.style.itemActive);
+              item.selected = checked;
+            }
+          }
+          calendarItemChanged = true;
+        });
+
+        // save
+        picker.on('click', '[data-save-data]', function (e) {
+          e.preventDefault();
+          var el = $(e.currentTarget);
+          if (el.hasClass('disable')) {
+            return;
+          }
+          if (settings.onClickSave &amp;&amp; $.isFunction(settings.onClickSave)) {
+            settings.onClickSave(activeDate.format('YYYY-MM'), activeDate.format('YYYY-MM-DD'), getSelectedData(calendarItemData), function () {
+              calendarItemChanged = false;
+            });
+          }
+        });
+
+        //clear
+        picker.on('click', '[data-clear-data]', function (e) {
+          e.preventDefault();
+          var el = $(e.currentTarget);
+          if (el.hasClass('disable')) {
+            return;
+          }
+          for (var i = 0, len = calendarItemData.length; i &lt; len; i++) {
+            if (calendarItemData[i].status !== 'appointed') {
+              calendarItemData[i].selected = false;
+            }
+          }
+          picker.find('[data-calendar-item]').removeClass(settings.style.itemActive);
+          picker.find('[data-select-all]').prop('checked', false);
+        });
+
+        if (settings.onClickClear &amp;&amp; $.isFunction(settings.onClickClear)) {
+          settings.onClickClear(activeDate.format('YYYY-MM'), activeDate.format('YYYY-MM-DD'), getSelectedData(calendarItemData), function () {
+            calendarItemChanged = false;
+          });
+        }
+      };
+
+      /**
+       * 根据events返回的数据设置日程信息
+       * @param data
+       */
+      var loadData = function (data) {
+        if (!data) {
+          return;
+        }
+        var dataMonth = picker.find('[data-days]');
+        var schedules = data.schedules;
+        var currentDate = data.currentDate;
+        var activeDate = data.activeDate;
+        var scheduleItems = data.scheduleItems;
+        var i, len;
+
+        for (i = 0, len = schedules.length; i &lt; len; i++) {
+          dataMonth.find('[data-day="' + schedules[i] + '"]').addClass(settings.style.selected);
+        }
+        picker.find('span[data-day="' + activeDate + '"]').addClass(settings.style.active)
+          .siblings().removeClass(settings.style.active);
+
+        if (moment(activeDate) &lt; moment(currentDate)) {
+          editStatus = false;
+        } else {
+          editStatus = true;
+        }
+        picker.find('[data-save-data],[data-clear-data]')[editStatus ? 'removeClass' : 'addClass']('disable');
+        if (editStatus) {
+          picker.find('[data-select-all]').removeAttr('disabled');
+        } else {
+          picker.find('[data-select-all]').attr('disabled', 'disabled');
+        }
+
+        for (i = 0, len = scheduleItems.length; i &lt; len; i++) {
+          var status = scheduleItems[i].status;
+          var index = scheduleItems[i].index;
+          picker.find('[data-calendar-item="' + scheduleItems[i].index + '"]').addClass(status === 'appointed' ? settings.style.itemAppointed : settings.style.itemActive);
+          calendarItemData[index].selected = true;
+          calendarItemData[index].status = status;
+        }
+      };
+
+      //清空数据
+      var clearData = function () {
+        for (var i = 0, len = calendarItemData.length; i &lt; len; i++) {
+          calendarItemData[i].selected = false;
+          calendarItemData[i].status = '';
+        }
+        picker.find('[data-calendar-item]').each(function (index, item) {
+          $(item).removeClass(settings.style.itemActive + ' ' + settings.style.itemAppointed);
+        });
+        picker.find('[data-save-data],[data-clear-data]').removeClass('disable');
+        picker.find('[data-select-all]').removeAttr('disabled');
+      };
+
+
+      //渲染模板数据
+      var json = {};
+      json.currentDate = activeDate.format('YYYY年M月');
+      json.daysHtml = renderDays();
+      json.calendarItems = renderCalendarItems();
+      json.currentYMD = activeDate.format('YYYY年M月D日');
+      picker.html(applyTemplate(componentTmpl, json));
+
+      createElement();
+      initEvent();
+
+      //加载数据
+      if (settings.events &amp;&amp; $.isFunction(settings.events)) {
+        settings.events(activeDate.format('YYYY-MM'), activeDate.format('YYYY-MM-DD'), loadData);
+      }
+
+      if (settings.plugins) {
+        if (!$.isArray(settings.plugins)) {
+          settings.plugins = [settings.plugins];
+        }
+        $.each(settings.plugins, function (index, item) {
+          if ($.schedulePickerPlugins[item] &amp;&amp; $.isFunction($.schedulePickerPlugins[item].loadPlugin)) {
+            $.schedulePickerPlugins[item].loadPlugin(picker);
+          }
+        });
+      }
+      api = {
+        calendarItemData: calendarItemData,
+        settings: settings
+      };
+      picker.data(componentName, api);
+
+    });
+  };
+})(jQuery);
+
+</pre>
+</div>
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/SyntaxHighlighter/scripts/XRegExp.js"></script>
+<script src="../../app/bower_components/SyntaxHighlighter/scripts/shCore.js"></script>
+<script src="../../app/bower_components/SyntaxHighlighter/scripts/shAutoloader.js"></script>
+<script src="../../app/bower_components/SyntaxHighlighter/scripts/shBrushXml.js"></script>
+
+<script>
+  $(function () {
+    function path() {
+      var args = arguments, result = [];
+      for (var i = 0; i < args.length; i++){
+        result.push(args[i].replace('@', '../../app/bower_components/SyntaxHighlighter/scripts/'));
+      }
+      return result;
+    }
+    SyntaxHighlighter.autoloader.apply(null, path(
+        'applescript @shBrushAppleScript.js',
+        'actionscript3 as3 @shBrushAS3.js',
+        'bash shell @shBrushBash.js',
+        'coldfusion cf @shBrushColdFusion.js',
+        'cpp c @shBrushCpp.js',
+        'c# c-sharp csharp @shBrushCSharp.js',
+        'css @shBrushCss.js',
+        'delphi pascal @shBrushDelphi.js',
+        'diff patch pas @shBrushDiff.js',
+        'erl erlang @shBrushErlang.js',
+        'groovy @shBrushGroovy.js',
+        'java @shBrushJava.js',
+        'jfx javafx @shBrushJavaFX.js',
+        'js jscript javascript @shBrushJScript.js',
+        'perl pl @shBrushPerl.js',
+        'php @shBrushPhp.js',
+        'text plain @shBrushPlain.js',
+        'py python @shBrushPython.js',
+        'powershell ps posh @shBrushPowerShell.js',
+        'ruby rails ror rb @shBrushRuby.js',
+        'sass scss @shBrushSass.js',
+        'scala @shBrushScala.js',
+        'sql @shBrushSql.js',
+        'vb vbnet @shBrushVb.js',
+        'xml xhtml xslt html @shBrushXml.js'
+    ));
+    SyntaxHighlighter.all();
+  });
+</script>
+</body>
+</html>

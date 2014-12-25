@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ./themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp" ng-controller="HopefutureBlogCtrl">
+<% include ./views/common/header.html %>
+<div ng-include="'views/account/login.html'" ng-controller="LoginCtrl"></div>
+<% include ./views/common/footer.html %>
+
+<!-- build:js scripts/vendor-login.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!--校验国际化 -->
+<script src="bower_components/jquery-validation/src/localization/messages_zh.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/login.js -->
+<script src="scripts/hopefuture/hf_validate.js"></script>
+<script src="scripts/apps/account/app-login.js"></script>
+
+
+<script src="scripts/services/httpInterceptor.js"></script>
+<script src="scripts/services/errorCodes.js"></script>
+<script src="scripts/services/account/service-login.js"></script>
+
+<script src="scripts/controllers/controller-common.js"></script>
+<script src="scripts/controllers/controller-hopefuture-blog.js"></script>
+<script src="scripts/controllers/account/controller-login.js"></script>
+
+<script src="scripts/directives/account/directive-login.js"></script>
+<!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <textarea id="content"></textarea>
+</div>
+<!-- TinyMCE -->
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/tinymce/tinymce.jquery.js"></script>
+<script src="../../app/scripts/components/tinymce/langs/zh_CN.js"></script>
+<script src="../../app/bower_components/tinymce-syntaxhighlighter/plugin.js"></script>
+<script src="../../app/bower_components/tinymce-syntaxhighlighter/langs/zh_CN.js"></script>
+<script>
+  $(function () {
+    var editor = new tinymce.Editor('content', {
+      height: 400,
+      menubar: false, //Disable all menu
+      content_css: '../../app/styles/tinymce.css',
+      syntaxhighlighter_image_url: '../../app/bower_components/tinymce-syntaxhighlighter/',
+      plugins: [
+        'autolink link image preview hr code fullscreen table textcolor charmap syntaxhighlighter'
+      ],
+      toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | styleselect | fontselect fontsizeselect formatselect ' +
+          '| forecolor backcolor removeformat | bullist numlist outdent indent blockquote | alignleft aligncenter alignright alignjustify | ' +
+          'hr image link unlink | charmap table code preview fullscreen | syntaxhighlighter'
+    }, tinymce.EditorManager);
+    editor.render();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "angularjs-demo",
+  "description": "基于 AngularJS 的单元测试",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-mocks": "1.2.x",
+    "bootstrap": "3.1.x"
+  }
+}

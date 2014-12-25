@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hope Future 博客介绍</title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ./themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp">
+<% include ./views/common/header.html %>
+
+<div class="jumbotron blog-jumbotron">
+  <div class="container hf-paragraph">
+    <h1 class="text-center">Hope Future 博客介绍</h1>
+
+    <p>&nbsp;</p>
+
+    <p>欢迎使用 Hope Future 博客系统。请到这里来，请到这里来 ... 这里有一个实现梦想的世界。赶快开启您的博客吧！</p>
+
+    <p>
+      世界是美好的！生活是美好的！在这个美好的时代，我们借助互联网，可以在这里展现自己的才华，
+      分享自己的快乐，发表自己的看法，书写自己喜欢的文章，研究自己喜欢的东西，追求自己的梦想，实现自己的价值。
+    </p>
+
+    <p>
+      最终，我们成为一个强者，来到这里，希望您能尽快成长。
+    </p>
+
+    <p>
+      该项目是一个免费blog搭建系统，项目完全是开源免费的，想学习研究的童鞋们请
+      <strong><a target="_blank" href="https://github.com/linder0209/hopefuture-blog">猛击这里</a></strong>
+      来获取项目源码。项目开发过程中用到了时下比较流行的前端开源框架和技术。用到的相关技术主要有：
+    </p>
+
+    <ul class="hf-callout hf-callout-info list-unstyled hf-list">
+      <li>项目管理：Grunt Bower Yeoman</li>
+      <li>项目基于Bootstrap css框架开发</li>
+      <li>后台服务器基于Node.js，利用 express 来搭建项目</li>
+      <li>数据库采用 Mongodb，利用 mongoose 驱动来管理数据库</li>
+      <li>页面渲染采用 jQuery、Angular、 Angular UI 等</li>
+      <li>页面表单校验采用jQuery插件 <a href="http://jqueryvalidation.org/" target="_blank">jquery-validation</a></li>
+      <!--<li>Javascript模块化管理采用 RequireJS（待改进）</li>-->
+      <li>单元测试：grunt + karma + Jasmine，基于Angular 测试</li>
+      <li>端到端（e2e）测试：protractor</li>
+      <li>Javascript 书写和语法校验：JSHint</li>
+      <li>Javascript 文档（doc）生成： Jsdoc</li>
+    </ul>
+  </div>
+</div>
+
+<% include ./views/common/footer.html %>
+
+<!-- build:js scripts/vendor-about.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/about.js -->
+<script src="scripts/apps/app-hopefuture.js"></script>
+<!-- endbuild -->
+</body>
+</html>

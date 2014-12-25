@@ -1,0 +1,23 @@
+<h1 class="article-type-title">分类目录：{{category}}</h1>
+
+<article class="article-list" ng-repeat="article in articles">
+  <header>
+    <h4>
+      <span class="glyphicon glyphicon-calendar"></span>
+      {{article.createdDate}}
+    </h4>
+
+    <h2>
+      <a ng-href="#/article/{{article._id}}">{{article.title}}</a>
+    </h2>
+  </header>
+
+  <section class="article-content">
+    <div ng-bind-html="article.content"></div>
+    <p><a ng-href="#/article/{{article._id}}">阅读全文 »</a></p>
+  </section>
+  <aside class="article-meta"></aside>
+</article>
+
+<!--页面加载后，滚动条滑到最上面-->
+<div class="sr-only" scroll-top></div>

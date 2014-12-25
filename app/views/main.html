@@ -1,0 +1,75 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>Hope Future 博客</h1>
+
+    <h2>开源、简洁、免费博客系统，让你书写博客更方便，更简单。</h2>
+
+    <p class="masthead-button-links">
+      <a class="btn btn-lg btn-primary" target="_blank"
+         href="https://github.com/linder0209/hopefuture-blog">Hope Future 博客源码下载</a>
+      <a class="btn btn-lg btn-primary" target="_blank"
+         href="https://github.com/linder0209/hopefuture-blog/issues/new">意见反馈</a>
+    </p>
+
+  </div>
+</div>
+
+<div class="container blog-container">
+  <article class="article-list" ng-repeat="article in articles">
+    <h2>
+      <a ng-href="{{article.account}}#/article/{{article._id}}">{{article.title}}</a>
+    </h2>
+
+    <section>
+
+      <div class="article-content" ng-bind-html="article.content"></div>
+
+      <p><a ng-href="{{article.account}}#/article/{{article._id}}">阅读全文 »</a></p>
+    </section>
+
+    <aside class="article-meta">
+      <ul class="list-unstyled clearfix">
+        <li>
+          <span class="glyphicon glyphicon-calendar"></span>
+          发布时间：{{article.createdDate}}
+        </li>
+        <li>
+          <span class="fa fa-comment" title="评论"></span>
+          <span title="文章《{{article.title}}》的评论数">{{article.commentCount || 0}} 条评论</span>
+        </li>
+        <li ng-if="article.categories">
+          <span class="glyphicon glyphicon-folder-close" title="分类目录"></span>
+          <a ng-href="{{article.account}}#/category/{{category._id}}" ng-repeat="category in article.categories"
+             title="查看分类目录 {{category.name}} 中的全部文章" href="">{{category.name}}</a>
+        </li>
+        <li ng-if="article.labels">
+          <span class="glyphicon glyphicon-tags" title="标签"></span>
+          <a ng-href="{{article.account}}#/label/{{label._id}}" ng-repeat="label in article.labels" title="查看标签 {{label.name}} 中的全部文章"
+             href="">{{label.name}}</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-user" title="作者"></span>
+          <a ng-href="{{article.account}}" href="" title="查看作者的所有博客">{{article.account}}</a>
+        </li>
+        <li>
+          <span class="fa fa-eye" title="浏览次数"></span>
+          浏览次数 {{article.readCounts || 0}}
+        </li>
+      </ul>
+
+    </aside>
+
+    <hr/>
+  </article>
+
+  <nav class="text-center ng-hide" ng-show="articles.length>0;">
+    <ul class="pagination pagination-lg boutique-pagination">
+      <li ng-class="{disabled:currentPage==1}"><a href="" ng-click="prevOrNextPage(-1,$event);"><i class="fa fa-angle-left"></i></a></li>
+      <li><span class="page-number">{{currentPage}} / {{numPages}}</span></li>
+      <li ng-class="{disabled:currentPage==numPages}"><a href="" ng-click="prevOrNextPage(1,$event)"><i class="fa fa-angle-right"></i></a></li>
+    </ul>
+  </nav>
+
+</div>
+
+<a class="back-to-top btn btn-primary" href="" title="返回顶部">返回顶部</a>

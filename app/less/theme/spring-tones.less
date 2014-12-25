@@ -1,0 +1,33 @@
+// 以下变量跟 bootstrap对应，需要定制的皮肤颜色
+// 定制参考： http://www.lavishbootstrap.com
+// http://www.lavishbootstrap.com/?image_url=http://design-seeds.com/palettes/12/SpringTones505.jpg
+@body-bg: #dee1dd;
+
+@gray-lighter: #c4cdc1;
+
+@gray-light: #99aead;
+
+@gray: #6d9197;
+
+@brand-primary: #658b6f;
+
+@gray-dark: #2f575d;
+
+/**
+* http://www.lavishbootstrap.com/?image_url=http://design-seeds.com/palettes/12/SpringTones505.jpg
+* 官网提供的默认值为 #28363d   用以下公式计算为 #283637
+**/
+
+@navbar-inverse-bg: #28363d;//spin(darken(@brand-primary, 28.3%),50);
+
+//页面底部样式
+@footer-links-title-color: spin(@brand-primary, 345);
+@footer-links-content-color: lighten(@brand-primary, 50%);
+@footer-copyright-color: @gray;
+@footer-copyright-bg: @body-bg;
+
+//后台管理样式
+@sidebar-bg:lighten(@gray-lighter, 10%);
+@sidebar-border-color:@gray-light;
+@sidebar-color:@brand-primary;
+@sidebar-active-color:@body-bg;

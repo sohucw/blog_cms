@@ -1,0 +1,20 @@
+/** 第三方组件 样式**/
+/**
+ * 修改分享代码样式与bootstrap的冲突
+ * http://www.bshare.cn
+**/
+.bsBox,
+.bsBox *,
+#bsPanelHolder,
+#bsPanelHolder * {
+  .box-sizing(content-box);
+}
+
+.syntaxhighlighter {
+  padding: 10px 0;
+}
+
+/** 解决与Bootstrap冲突**/
+.syntaxhighlighter table td.code .container:before {
+  display: none;
+}

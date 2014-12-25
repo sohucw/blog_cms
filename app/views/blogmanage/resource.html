@@ -1,0 +1,104 @@
+<h3 class="page-header">资源链接</h3>
+
+<div class="row">
+  <div class="col-md-5 blog-resource-border">
+    <h4>{{resourceFormTitle}}</h4>
+
+    <form name="resourceForm" resource-validator="validator">
+      <div class="form-group">
+        <label for="name"><i class="required">*</i> 资源名称</label>
+        <input type="text" class="form-control" id="name" ng-model="resource.name" maxbyteslength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="categoryId">资源分类</label>
+        <select name="categoryId" id="categoryId" class="form-control" ng-model="resource.categoryId"
+                ng-options="category._id as category.name for category in categories">
+          <option value="">无分类</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="link"><i class="required">*</i> 资源 URL</label>
+        <input type="url" class="form-control" id="link" name="link" ng-model="resource.link" maxbyteslength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="description">描述</label>
+        <textarea class="form-control" id="description" name="description" rows="3" ng-model="resource.description" maxbyteslength="1000"></textarea>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">{{submitText}}</button>
+        <button type="button" class="btn btn-default ng-hide" ng-click="cancelEdit()" ng-show="editStatus">取消修改</button>
+      </div>
+
+    </form>
+
+    <hr/>
+
+    <h4>资源分类</h4>
+
+    <div ng-controller="ResourceCategoryCtrl">
+      <div alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        {{alert.message}}
+      </div>
+      <div class="form-inline">
+        <div class="form-group">
+          <input type="text" maxbyteslength="100" ng-model="resourceCategory.name" class="form-control">
+          <button ng-click="addCategory()" class="btn btn-info" type="button">添加</button>
+        </div>
+
+        <div ng-show="$parent.categories.length>0" class="well well-sm element-list clearfix ng-hide resource-category">
+          <p class="help-block">点击名称可以编辑分类</p>
+          <span ng-repeat="category in $parent.categories">
+            <a href="" ng-click="updateCategory(category,$index,$event)">
+              {{category.name}}
+            </a>
+            <a href="" class="glyphicon glyphicon-trash" ng-click="deleteCategory(category,$index);"></a>
+              {{$last?'':','}}
+          </span>
+
+          <div ng-show="editCategoryStatus" class="ng-hide animate-show edit-panel" id="editCategoryPanel">
+            <input class="form-control input-sm" type="text" ng-model="editCategory.name">
+            <button type="button" class="btn btn-info btn-sm" ng-click="saveCategory()">修改</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="cancelCategory()">取消</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-7">
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary" ng-click="delete();">
+        <span class="glyphicon glyphicon-remove"></span> 删除
+      </button>
+    </div>
+
+    <hr/>
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th><input type="checkbox" ng-model="grid.checked" ng-change="selectAll()"/></th>
+        <th>资源名称</th>
+        <th>资源分类</th>
+        <th>资源 URL</th>
+        <th>&nbsp;</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="item in items" id="{{item._id}}">
+        <td><input type="checkbox" ng-model="item.checked" ng-change="selectItem()"/></td>
+        <td><a ng-href="{{item.link}}" target="_blank">{{item.name | truncate:40:true}}</a></td>
+        <td>{{item.categoryName || '无分类'}}</td>
+        <td>{{item.link | truncate:40:true}}</td>
+        <td>
+          <a class="glyphicon glyphicon-pencil" href="" ng-click="edit(item._id,$index);"></a>
+          <a class="glyphicon glyphicon-trash" href="" ng-click="delete(item);"></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

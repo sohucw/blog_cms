@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ../../themes/themes/themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp" ng-controller="HopefutureBlogCtrl">
+<% include ../../views/common/header.html %>
+
+<% if (overdue) { %>
+<div class="container" ng-controller="GenerateLinkCtrl" ng-init="accountId='<%= accountId %>'">
+  <div class="well margin-top-hg">
+    <p ng-show="showActivatedInfo" class="ng-hide">您的账号激活链接已过期，点击 <a href="" ng-click="generateLink()"><strong>这里</strong></a> 重新生成激活链接。</p>
+
+    <div alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</div>
+  </div>
+</div>
+<% }else { %>
+<div class="container">
+  <div class="hf-callout hf-callout-info margin-top-hg">
+    您的账号已激活！ <a href="/login" ng-href="/login">请登录</a>
+  </div>
+</div>
+<% } %>
+
+<% include ../../views/common/footer.html %>
+<!-- build:js ../../scripts/vendor-activate.js -->
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/angular/angular.js"></script>
+<script src="../../bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="../../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!--校验国际化 -->
+<script src="../../bower_components/jquery-validation/src/localization/messages_zh.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../../scripts/activate.js -->
+<script src="../../scripts/hopefuture/hf_validate.js"></script>
+<script src="../../scripts/apps/account/app-signup.js"></script>
+
+<script src="../../scripts/services/httpInterceptor.js"></script>
+<script src="../../scripts/services/account/service-signup.js"></script>
+
+<script src="../../scripts/controllers/controller-common.js"></script>
+<script src="../../scripts/controllers/controller-hopefuture-blog.js"></script>
+<script src="../../scripts/controllers/account/controller-signup.js"></script>
+<!-- endbuild -->
+</body>
+</html>

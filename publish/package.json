@@ -1,0 +1,50 @@
+{
+  "name": "hopefuture-blog",
+  "version": "0.3.1",
+  "authors": [
+    "linder0209 <linder0209@126.com>"
+  ],
+  "description": "This app is a free, open source blog(Hope Future Blog).",
+  "keywords": [
+    "hope",
+    "future",
+    "blog"
+  ],
+  "dependencies": {
+    "express": "~4.10.1",
+    "serve-favicon": "~2.1.7",
+    "morgan": "~1.5.0",
+    "cookie-parser": "~1.3.3",
+    "body-parser": "~1.9.3",
+    "express-session": "~1.9.2",
+    "debug": "~2.1.0",
+    "ejs": "~1.0.0",
+    "mongoose": "~3.8.20",
+    "underscore": "~1.7.0",
+    "crypto": "~0.0.3",
+    "moment": "~2.8.4",
+    "nodemailer": "~1.3.0",
+    "nodemailer-smtp-transport": "0.1.13"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./bin/hopefuture-blog.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/linder0209/hopefuture-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/linder0209/hopefuture-blog/issues"
+  },
+  "homepage": "https://github.com/linder0209/hopefuture-blog",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/linder0209/hopefuture-blog/blob/master/LICENSE.md"
+    }
+  ]
+}

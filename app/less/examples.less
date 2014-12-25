@@ -1,0 +1,22 @@
+// Core variables
+@import "core/variables.less";
+//一些样式前缀的处理
+@import "core/vendor-prefixes.less";
+//覆盖部分 bootstrap 样式
+@import "core/bootstrap-custom.less";
+// jQuery validate
+@import "core/validate.less";
+
+body {
+  padding-top: @margin-hg;
+}
+
+.h-grid-modal .modal-dialog {
+  width: 1000px;
+}
+
+.blog-btn-group {
+  .btn-group + .btn-group {
+    margin-left: @margin-md;
+  }
+}

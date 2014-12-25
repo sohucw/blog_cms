@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ./themes.html %>
+
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <!-- endbuild -->
+
+</head>
+<body ng-app="hopefutureBlogApp" ng-controller="HopefutureBlogCtrl">
+<% include ./views/common/header.html %>
+<div ng-include="'views/main.html'" ng-controller="MainCtrl"></div>
+<% include ./views/common/footer.html %>
+
+<!-- build:js scripts/vendor-main.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!--校验国际化 -->
+<script src="bower_components/jquery-validation/src/localization/messages_zh.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/main.js -->
+<script src="scripts/hopefuture/hf_validate.js"></script>
+<script src="scripts/apps/app-main.js"></script>
+
+<script src="scripts/services/httpInterceptor.js"></script>
+<script src="scripts/services/service-hopefuture-blog.js"></script>
+<script src="scripts/services/service-main.js"></script>
+
+<script src="scripts/controllers/controller-hopefuture-blog.js"></script>
+<script src="scripts/controllers/controller-main.js"></script>
+
+<script src="scripts/directives/blog/directive-blog.js"></script>
+<!-- endbuild -->
+</body>
+</html>

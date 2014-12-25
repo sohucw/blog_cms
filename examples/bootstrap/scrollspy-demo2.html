@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>bootstrap scrollspy Demo</title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <style>
+    .article-catalogue {
+      position: fixed;
+      top: 20px;
+      right: 200px;
+    }
+
+    .article-catalogue .nav > li > a {
+      display: block;
+      padding: 4px 20px;
+      color: #999;
+    }
+
+    .article-catalogue .nav > li > a:hover,
+    .article-catalogue .nav > li > a:focus {
+      padding-left: 19px;
+      color: #563d7c;
+      background-color: transparent;
+      border-left: 1px solid #563d7c;
+    }
+
+    .article-catalogue .nav > .active > a,
+    .article-catalogue .nav > .active:hover > a,
+    .article-catalogue .nav > .active:focus > a {
+      padding-left: 18px;
+      font-weight: 700;
+      color: #563d7c;
+      background-color: transparent;
+      border-left: 2px solid #563d7c
+    }
+
+    .article-catalogue .nav .nav {
+      display: none;
+      padding-left: 1.5em;
+      padding-bottom: 10px;
+    }
+
+    .article-catalogue .nav .nav > li > a {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+
+    .article-catalogue .nav > .active > ul {
+      display: block;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".article-catalogue">
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="article-content">
+        <h2 id="catalog-0">其他栏目</h2>
+
+        <h1 id="catalog-1">一级栏目1</h1>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h2 id="catalog-1-0">二级栏目1</h2>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h3 id="catalog-1-0-0">三级栏目1</h3>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h4 id="catalog-1-0-0-0">四级栏目1</h4>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h5 id="catalog-1-0-0-0-0">五级栏目1</h5>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h6 id="catalog-1-0-0-0-0-0">六级栏目1</h6>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h6 id="catalog-1-0-0-0-0-1">六级栏目2</h6>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h5 id="catalog-1-0-0-0-1">五级栏目2</h5>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <h4 id="catalog-1-0-0-1">四级栏目2</h4>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h3 id="catalog-1-0-1">三级栏目2</h3>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h2 id="catalog-1-1">二级栏目2</h2>
+
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h1 id="catalog-2">一级栏目2</h1>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+        <h1 id="catalog-3">一级栏目3</h1>
+        <p>内容</p>
+
+        <p>内容</p>
+
+        <p>内容</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="article-catalogue">
+    <ul class="nav">
+      <li><a  href="#catalog-0">其他栏目</a></li>
+      <li><a  href="#catalog-1">一级栏目1</a>
+        <ul class="nav">
+          <li><a  href="#catalog-1-0">二级栏目1</a>
+            <ul class="nav">
+              <li><a  href="#catalog-1-0-0">三级栏目1</a>
+                <ul class="nav">
+                  <li><a  href="#catalog-1-0-0-0">四级栏目1</a>
+                    <ul class="nav">
+                      <li><a  href="#catalog-1-0-0-0-0">五级栏目1</a>
+                        <ul class="nav">
+                          <li><a  href="#catalog-1-0-0-0-0-0">六级栏目1</a></li>
+                          <li><a  href="#catalog-1-0-0-0-0-1">六级栏目2</a></li>
+                        </ul>
+                      </li>
+                      <li><a  href="#catalog-1-0-0-0-1">五级栏目2</a></li>
+                    </ul>
+                  </li>
+                  <li><a  href="#catalog-1-0-0-1">四级栏目2</a></li>
+                </ul>
+              </li>
+              <li><a  href="#catalog-1-0-1">三级栏目2</a></li>
+            </ul>
+          </li>
+          <li><a  href="#catalog-1-1">二级栏目2</a></li>
+        </ul>
+      </li>
+      <li><a  href="#catalog-2">一级栏目2</a></li>
+      <li><a  href="#catalog-3">一级栏目3</a></li>
+    </ul>
+  </div>
+
+</div>
+
+
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../app/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <style>
+        body {
+            padding: 50px;
+        }
+
+        .catalogue-panel {
+            height: 302px;
+            width: 500px;
+            overflow: hidden;
+            position: relative;
+            padding: 0 10px;
+            border: 1px solid #008ab8;
+        }
+
+        .nav {
+            margin: 0 30px 0 0;
+            position: relative;
+        }
+
+        .nav li{
+            line-height: 30px;
+        }
+
+        .catalogue-arrow {
+            position: absolute;
+            top: 40%;
+            right: 10px;
+            border: 1px solid #008ab8;
+            border-radius: 8px;
+        }
+
+        .catalogue-arrow .disabled{
+            cursor: default;
+        }
+        .catalogue-arrow .disabled span {
+            color: #aaa;
+        }
+
+        .catalogue-arrow .up {
+            border-bottom: 1px solid #008ab8;
+            padding: 5px 5px 2px 6px;
+            cursor: pointer;
+        }
+
+        .catalogue-arrow .down {
+            padding: 5px 5px 2px;
+            cursor: pointer;
+        }
+        .catalogue-arrow .glyphicon{
+            color: #008ab8;
+        }
+
+    </style>
+</head>
+<body>
+<h1>例子：没有滚动条，但也可以滚动其内容，利用定位来实现</h1>
+
+<div class="catalogue-panel">
+    <ul class="nav">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5例子：没有滚动条，但也可以滚动其内容，利用定位来实现例子：没有滚动条，但也可以滚动其内容，利用定位来实现</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+    </ul>
+    <div class="catalogue-arrow">
+        <div class="up disabled"><span class="glyphicon glyphicon-chevron-up"></span></div>
+        <div class="down"><span class="glyphicon glyphicon-chevron-down"></span></div>
+    </div>
+</div>
+<script src="../app/bower_components/jquery/dist/jquery.js"></script>
+<script>
+
+    var $upElement = $('.catalogue-arrow .up');
+    var $downElement = $('.catalogue-arrow .down');
+
+    var $navElement = $('.nav');
+    var $liElements = $navElement.find(' > li');
+
+    //The first visible row element index.
+    var rowIndex;
+    //The visible row element size
+    var visibleRowSize;
+    //All of row element size;
+    var rowSize;
+    // Each of row default height
+    var rowHeight = 30;
+
+    function fadeInOutUp() {
+        $downElement.removeClass('disabled');
+        if (rowIndex <= 0) {
+            $upElement.addClass('disabled');
+            return;
+        }
+        var _index = --rowIndex;
+        $navElement.css({
+            top: -30 * _index
+        });
+    }
+
+    function fadeInOutDown() {
+        if(rowIndex === undefined || visibleRowSize === undefined || rowSize === undefined){
+            rowIndex = 0;
+            visibleRowSize = 0;
+            rowSize = 0;
+            var menuHeight = $('.catalogue-panel').outerHeight();
+            var subHeight = 0;
+            $liElements.each(function(index, element) {
+                var height = $(this).outerHeight();
+                subHeight += height;
+                rowSize +=  height / rowHeight;
+                if (subHeight <= menuHeight) {
+                    visibleRowSize += height / rowHeight;
+                }
+            });
+
+            if (visibleRowSize === rowSize) {
+                $downElement.addClass('disabled');
+            }
+        }
+        $upElement.removeClass('disabled');
+        if (rowIndex + visibleRowSize >= rowSize) {
+            $downElement.addClass('disabled');
+            return;
+        }
+        var _index = rowIndex++;
+        $navElement.css({
+            top: -30 * (_index + 1)
+        });
+    }
+
+    function wheelFn(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var originalEvent = e.originalEvent;
+        var upDown;
+        if (originalEvent.detail) {
+            var detail = originalEvent.detail;
+            if (detail < 0) { //up
+                upDown = 'up';
+            } else if (detail > 0) { //down
+                upDown = 'down';
+            }
+        } else if (originalEvent.wheelDelta) { //IE 6 7 8
+            var wd = originalEvent.wheelDelta;
+            if (wd > 0) { //up
+                upDown = 'up';
+            }
+            if (wd < 0) { //down
+                upDown = 'down';
+            }
+        }
+        if (upDown === 'up') {
+            if ($upElement.hasClass('disabled')) {
+                return;
+            }
+            fadeInOutUp();
+        } else {
+            if ($downElement.hasClass('disabled')) {
+                return;
+            }
+            fadeInOutDown();
+        }
+    }
+    // compatibility: mouse wheel event
+    // http://www.w3help.org/zh-cn/causes/SD9015
+    var ua = navigator.userAgent;
+    // ie 11 /gecko/i.test(ua) value is true ,so need to judge /firefox/i.test(ua)
+    if (/gecko/i.test(ua) && !/webkit/i.test(ua) && /firefox/i.test(ua)) {//Firefox
+        $(document).off('DOMMouseScroll.catalogue').on('DOMMouseScroll.catalogue', '.nav', wheelFn);
+    } else {//IE Safari Chrome Opera
+        $(document).off('mousewheel.catalogue').on('mousewheel.catalogue', '.nav', wheelFn);
+    }
+
+    $('.catalogue-arrow .up').click(function(e) {
+        e.preventDefault();
+        var el = $(e.currentTarget);
+        if (el.hasClass('disabled')) {
+            return;
+        }
+        fadeInOutUp();
+    });
+
+    $('.catalogue-arrow .down').click(function(e) {
+        e.preventDefault();
+        var el = $(e.currentTarget);
+        if (el.hasClass('disabled')) {
+            return;
+        }
+        fadeInOutDown();
+    });
+
+
+</script>
+</body>
+</html>

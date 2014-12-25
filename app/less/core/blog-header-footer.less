@@ -1,0 +1,141 @@
+/**
+ * 页面头部样式
+**/
+
+.blog-header.navbar-inverse {
+  background-color: @navbar-inverse-bg;
+  border-color: darken(@navbar-inverse-bg, 10%);
+  #gradient > .vertical(@start-color: lighten(@navbar-inverse-bg, 5%); @end-color: @navbar-inverse-bg);
+  .navbar-brand {
+    color: lighten(@navbar-inverse-bg, 70%);
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+  .navbar-brand.active {
+    color: #fff;
+    font-weight: bold;
+    background-color: darken(@navbar-inverse-bg, 1%);
+  }
+  .navbar-nav > li > a {
+    color: lighten(@navbar-inverse-bg, 70%);
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+  .navbar-nav > li.active{
+    font-weight: bold;
+    a,
+    a:hover,
+    a:focus{
+      background-color: darken(@navbar-inverse-bg, 1%);
+    }
+  }
+
+}
+
+/*
+* 页面底部样式
+*/
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-assist {
+  padding-top: 350px;
+}
+
+@media (min-width: 768px) {
+  .footer-assist {
+    padding-top: 301px;
+  }
+}
+
+@media (min-width: 992px) {
+  .footer-assist {
+    padding-top: 256px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .footer-assist {
+    padding-top: 206px;
+  }
+}
+
+.footer-links {
+  background-color: @navbar-inverse-bg;
+  border-bottom: 1px solid darken(@navbar-inverse-bg, 10%);
+  #gradient > .vertical(@start-color: lighten(@navbar-inverse-bg, 5%); @end-color: @navbar-inverse-bg);
+  padding: 20px 0;
+}
+
+.footer-copyright {
+  background-color: @footer-copyright-bg;
+  color: @footer-copyright-color;
+  padding: 10px 0 0;
+}
+
+.links-item > li {
+  float: left;
+}
+
+.links-item > li:first-child {
+  margin-right: @margin-lg;
+}
+
+.links-item-title {
+  color: @footer-links-title-color;
+  font-size: @font-size-medium;
+}
+
+.links-item-content > span {
+  display: inline-block;
+  margin-right: @margin-md;
+  margin-top: @margin-sm;
+}
+
+.links-item-content a,
+.links-item-content a:hover,
+.links-item-content a:focus,
+.links-item-content {
+  color: @footer-links-content-color;
+}
+
+.blog-footer-logo {
+  //FIXME：待实现 logo
+}
+
+.manage-footer {
+  position: absolute;
+  bottom: 0;
+  background-color: lighten(@navbar-inverse-bg, 10%);
+  border-bottom: 1px solid @navbar-inverse-bg;
+  #gradient > .vertical(@start-color: lighten(@navbar-inverse-bg, 15%); @end-color: @navbar-inverse-bg);
+  color: lighten(@navbar-inverse-bg, 60%);
+  padding: @padding-sm @padding-lg;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .manage-footer {
+    width: 75%;
+    margin-left: 25%;
+  }
+}
+
+//写在下面当屏幕最小宽度大于等于 992px时会应用该样式
+@media (min-width: 992px) {
+  .manage-footer {
+    width: 83.33333333%;
+    margin-left: 16.66666667%;
+  }
+}
+
+.manage-footer-assist {
+  padding-top: @padding-hg;
+}

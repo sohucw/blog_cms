@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Package API</title>
+
+                <link rel="stylesheet" type="text/css" href="styles/shCore.css">
+                <link rel="stylesheet" type="text/css" href="styles/shThemeDefault.css">
+                <script type="text/javascript" src="js/shCore.js"></script>
+                <script type="text/javascript" src="js/shBrushJScript.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="styles/stylesheet.css">
+	</head>
+	<body onLoad="SyntaxHighlighter.highlight(); location.hash=location.hash;">
+
+		<header>
+			<div class="header">
+				<?js print(render('header.tmpl', docs)); ?>
+
+				<div class="type">File</div>
+				<h1><?js= title ?></h1>
+			</div>
+		</header>
+
+		<div class="content">
+			<pre class="brush: js; lineno-anchors : true"><?js print(htmlsafe(docs.code)); ?></pre>
+		</div>
+
+		<?js print(render('footer.tmpl', this)); ?>
+
+		<script> sh_highlightDocument(); </script>
+	</body>
+</html>

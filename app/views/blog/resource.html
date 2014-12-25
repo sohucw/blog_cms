@@ -1,0 +1,15 @@
+<h1 class="article-type-title">资源链接</h1>
+
+<div class="resource-list">
+  <div class="resource-item" ng-repeat="resource in resources">
+    <h3>分类{{$index + 1}}： {{resource.categoryName || '无分类'}}</h3>
+
+    <p class="link clearfix">
+      <a ng-repeat="res in resource.categoryResources" target="_blank" ng-href="{{res.link}}"
+         popover="{{res.description}}" popover-trigger="mouseenter" popover-placement="right" popover-popup-delay="300">{{res.name}}</a>
+    </p>
+    <hr/>
+  </div>
+</div>
+<!--页面加载后，滚动条滑到最上面-->
+<div class="sr-only" scroll-top></div>

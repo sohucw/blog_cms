@@ -1,0 +1,29 @@
+// 以下变量跟 bootstrap对应，需要定制的皮肤颜色
+// 定制参考： http://www.lavishbootstrap.com
+// http://www.lavishbootstrap.com/?utf8=%E2%9C%93&image_url=http%3A%2F%2Fdesign-seeds.com%2Fpalettes%2FColorEscape_9.png&commit=Go+Lavish
+@body-bg: #e1e6ef;
+
+@gray-lighter: #a8d9ec;
+
+@gray-light: #c2a3aa;
+
+@gray: #69d0e0;
+
+@brand-primary: #47b1d2;
+
+//对于bootstrap 定制，还需要修改 @table-border-color
+@gray-dark: #88727d;
+
+@navbar-inverse-bg: #524a55;
+
+//页面底部样式
+@footer-links-title-color: spin(lighten(@brand-primary, 10%), 345);
+@footer-links-content-color: lighten(@brand-primary, 50%);
+@footer-copyright-color: @gray;
+@footer-copyright-bg: @body-bg;
+
+//后台管理样式
+@sidebar-bg:lighten(@gray-lighter, 10%);
+@sidebar-border-color:@gray-light;
+@sidebar-color:@brand-primary;
+@sidebar-active-color:@body-bg;

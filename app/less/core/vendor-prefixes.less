@@ -1,0 +1,30 @@
+/**
+ * 处理一些样式的前缀
+ * see Bootstrap  'less/mixins/vendor-prefixes.less'
+**/
+
+// Drop shadows
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+  box-shadow: @shadow;
+}
+
+// Transitions
+.transition(@transition) {
+  -webkit-transition: @transition;
+  -o-transition: @transition;
+  transition: @transition;
+}
+.transform(@transition) {
+  -webkit-transform: @transition;
+  -moz-transform: @transition;
+  -o-transform: @transition;
+  transform: @transition;
+}
+
+// Box sizing
+.box-sizing(@boxmodel) {
+  -webkit-box-sizing: @boxmodel;
+  -moz-box-sizing: @boxmodel;
+  box-sizing: @boxmodel;
+}

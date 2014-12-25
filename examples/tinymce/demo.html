@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <textarea id="content"></textarea>
+</div>
+<!-- TinyMCE -->
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/tinymce/tinymce.jquery.min.js"></script>
+<script src="../../app/scripts/components/tinymce/langs/zh_CN.js"></script>
+<script>
+  $(function () {
+    var editor = new tinymce.Editor('content', {
+      height: 400,
+      menubar: false, //Disable all menu
+      plugins: [
+        "autolink link image preview hr code fullscreen table textcolor charmap colorpicker"
+      ],
+//      plugins: [
+//        "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+//        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+//        "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+//      ],
+
+      toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | styleselect | fontselect fontsizeselect formatselect ' +
+          '| forecolor backcolor removeformat | bullist numlist outdent indent blockquote | alignleft aligncenter alignright alignjustify | ' +
+          'hr image link unlink | charmap table code preview fullscreen'
+      //statusbar : false
+    }, tinymce.EditorManager);
+    editor.render();
+  });
+</script>
+</body>
+</html>

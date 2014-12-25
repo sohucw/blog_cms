@@ -1,0 +1,12 @@
+<h3 class="page-header">主题，当前选择：{{currentTheme}}</h3>
+<ul class="blog-theme-container clearfix list-unstyled text-center">
+  <li ng-repeat="theme in themes">
+    <img class="blog-theme blog-theme-{{theme.code}}"/>
+
+    <div class="clearfix blog-theme-item">
+      <span class="pull-left" ng-bind="theme.name" title="{{theme.code}}"></span>
+      <button class="btn btn-primary btn-xs pull-right" ng-click="enableTheme(theme.code)">启用</button>
+    </div>
+  </li>
+</ul>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css ../styles/vendor-examples-grid.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css ../styles/examples-grid.css -->
+  <link rel="stylesheet" href="../styles/examples.css">
+  <!-- endbuild -->
+</head>
+<body ng-app="hopefutureBlogApp">
+<% include ../views/common/examples-nav.html %>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Grid List 例子</h1>
+
+    <p>这是一个基本的Grid（不带分页）例子，涵盖了常用的增删改查功能。操作采用模态窗口方式，数据交互采用 Ajax。</p>
+    <p>模态窗口是基于 <a href="https://github.com/angular-ui/bootstrap" target="_blank">Angular UI</a> 的。</p>
+  </div>
+</div>
+<div class="container" ng-include="'../views/examples/demo-grid.html'" ng-controller="DemoGridCtrl"></div>
+
+<!-- build:js ../scripts/vendor-examples-grid.js -->
+<!-- bower:js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/tinymce/tinymce.min.js"></script>
+<script src="../bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../bower_components/tinymce-syntaxhighlighter/plugin.js"></script>
+<!-- endbower -->
+<script src="../bower_components/moment/locale/zh-cn.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../scripts/examples-grid.js -->
+<script src="../scripts/hopefuture/hf_validate.js"></script>
+<script src="../scripts/apps/examples/app-demo-grid.js"></script>
+<script src="../scripts/services/httpInterceptor.js"></script>
+<script src="../scripts/services/examples/service-demo-grid.js"></script>
+<script src="../scripts/controllers/examples/controller-demo-grid.js"></script>
+<script src="../scripts/controllers/controller-common.js"></script>
+<script src="../scripts/directives/examples/directive-demo-grid.js"></script>
+<script src="../scripts/filters/filter-truncate.js"></script>
+<!-- endbuild -->
+</body>
+</html>
+

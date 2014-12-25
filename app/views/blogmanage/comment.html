@@ -1,0 +1,60 @@
+<h3 class="page-header">评论</h3>
+
+<div class="blog-btn-group">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary" ng-click="delete();">
+      <span class="glyphicon glyphicon-remove"></span> 删除
+    </button>
+  </div>
+
+  <div class="btn-group blog-search-text">
+    <div class="input-group has-success">
+      <input type="text" placeholder="搜索评论" class="form-control" ng-model="searchContent"/>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button" ng-click="search();">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>
+    </div>
+  </div>
+
+</div>
+<hr/>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th><input type="checkbox" ng-model="grid.checked" ng-change="selectAll()"/></th>
+    <th>评论者</th>
+    <th>评论者邮箱</th>
+    <th>评论</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="item in items" id="{{item._id}}">
+    <td><input type="checkbox" ng-model="item.checked" ng-change="selectItem()"/></td>
+    <td>{{item.commentator}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.content}}</td>
+    <td>
+      <a class="glyphicon glyphicon-trash" href="" ng-click="delete(item);"></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-9">
+    <pagination total-items="totalItems" ng-model="page.currentPage" items-per-page="itemsPerPage" max-size="maxSize"
+                boundary-links="true" num-pages="numPages" ng-change="loadPageData()"></pagination>
+  </div>
+
+  <div class="col-sm-3">
+    <ul class="pagination pull-right">
+      <li class="active">
+        <a>总记录数：{{totalItems}} / 总页数：{{numPages}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../app/images/favicon.ico">
+
+  <title>登录后个人博客</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+  <link href="./styles/lavish-bootstrap2.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="./styles/blog.css" rel="stylesheet">
+
+  <!-- 临时样式，回头左侧换成菜单实现-->
+  <link href="./styles/dashboard.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand active" href="#">首页</a>
+      <a class="navbar-brand" href="#">文章</a>
+      <a class="navbar-brand" href="#">关于</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">换肤<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">蓝色经典</a></li>
+            <li><a href="#">温馨浪漫</a></li>
+            <li><a href="#">夕阳西下</a></li>
+          </ul>
+        </li>
+        <li><a href="#">登录</a></li>
+        <li><a href="#">注册</a></li>
+        <li><a href="#">欢迎 linder0209</a></li>
+        <li><a href="#">我的博客</a></li>
+        <!-- 这里进入后台管理自己的博客-->
+        <li><a href="#">登出</a></li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</header>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">发表文章</a></li>
+        <li><a href="#">文章管理</a></li>
+        <li><a href="#">类别管理</a></li>
+        <li><a href="#">评论管理</a></li>
+        <li><a href="#">博客管理</a></li>
+      </ul>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h2>撰写新文章</h2>
+
+      <form>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="text" placeholder="在此输入标题" id="title" class="form-control" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <lable>UEditor 编辑器</lable>
+              <script id="content" name="content" type="text/plain">撰写博客内容</script>
+            </div>
+
+            <div class="form-group">
+              <lable>KindEditor 编辑器</lable>
+              <textarea name="kindContent" style="width:100%;height:400px;visibility:hidden;">撰写博客内容</textarea>
+            </div>
+
+            <div class="form-group">
+              <lable>CKEditor 编辑器</lable>
+              <textarea id="ckeContent" name="ckeContent" style="width:100%;">撰写博客内容</textarea>
+            </div>
+
+          </div>
+          <div class="col-md-3">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">发布</h3>
+              </div>
+              <div class="panel-body">
+                <button class="btn btn-default" type="button">保存草稿</button>
+                <button class="btn btn-default" type="button">预览</button>
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-info" type="button">发布</button>
+              </div>
+            </div><!--发布-->
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">文章类型</h3>
+              </div>
+              <div class="panel-body">
+                <div class="radio">
+                  <label><input type="radio" name="articleType" checked> 富文本编辑器 （UEditor、KindEditor 或 CKEditor）</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="articleType"> Markdown 编辑器</label>
+                </div>
+              </div>
+            </div><!--文章类型-->
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">分类目录</h3>
+              </div>
+              <div class="panel-body">
+                <div class="tabbable">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#panel-454081">所有分类目录</a></li>
+                    <li><a data-toggle="tab" href="#panel-856212">最常用</a></li>
+                  </ul>
+                  <div class="tab-content">
+                    <div id="panel-454081" class="tab-pane active">
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="category"> JavaScript</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="category"> HTML</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="category"> CSS</label>
+                      </div>
+                    </div>
+                    <div id="panel-856212" class="tab-pane">
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="category"> JavaScript</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" name="category"> CSS</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-link" type="button"> + 添加新分类目录</button>
+                </div>
+                <div>
+                  <div class="form-group">
+                    <input type="text" placeholder="分类目录" id="newcategory" name="newcategory" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <select class="form-control" name="allcategory" id="allcategory">
+                      <option value="-1">&mdash; 父级分类目录 &mdash;</option>
+                      <option value="3" class="level-0">JavaScript</option>
+                      <option value="4" class="level-1">&nbsp;&nbsp;&nbsp;jQuery</option>
+                      <option value="5" class="level-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jQuery ui</option>
+                      <option value="1" class="level-0">未分类</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-info" type="button">添加</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 文章分类 -->
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">标签</h3>
+              </div>
+              <div class="panel-body form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="newlabel" id="newlabel">
+                  <button type="button" class="btn btn-info">添加</button>
+                </div>
+                <p></p>
+                <p>多个标签请用英文逗号（,）分开</p>
+                <div>
+                  <span class="text-info">
+                    <a href="">X</a>
+                    Angular
+                  </span>
+                  <span class="text-info">
+                    <a href="">X</a>
+                    jQuery
+                  </span>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-sm btn-link" type="button"> 从常用标签中选择</button>
+                </div>
+                <ul class="breadcrumb">
+                  <li><a href="#">Angular</a></li>
+                  <li><a href="#">jQuery</a></li>
+                </ul>
+              </div>
+            </div><!--标签-->
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<script src="../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+<!-- UEditor -->
+<!-- 配置文件 -->
+<script type="text/javascript" src="../app/bower_components/ueditor/dist/nodejs/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="../app/bower_components/ueditor/dist/nodejs/ueditor.all.js"></script>
+<!-- 语言包 -->
+<script type="text/javascript" src="../app/bower_components/ueditor/dist/nodejs/lang/zh-cn/zh-cn.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+  var ue = UE.getEditor('content');
+</script>
+
+<!-- KindEditor -->
+<link rel="stylesheet" href="../app/bower_components/kindeditor/themes/default/default.css"/>
+<script type="text/javascript" src="../app/bower_components/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="../app/bower_components/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+  KindEditor.ready(function (K) {
+    var editor = KindEditor.create('textarea[name="kindContent"]', {
+      allowFileManager: true
+    });
+  });
+</script>
+
+<!-- CKEditor -->
+<script type="text/javascript" src="../app/bower_components/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="../app/bower_components/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('#ckeContent').ckeditor();
+  });
+</script>
+
+</body>
+</html>

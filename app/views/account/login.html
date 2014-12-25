@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <form name="loginForm" class="col-md-6 col-md-offset-3 form-panel form-panel-genre" method="post" login-validator>
+
+      <h2 class="text-center">用户登录</h2>
+
+      <div alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</div>
+
+      <div class="form-group">
+        <label for="loginName" class="control-label">账号</label>
+        <a ng-href="/forgot#/loginname" class="pull-right">忘记账户</a>
+        <input type="text" class="form-control" id="loginName" name="loginName" minlength="4" maxlength="80" required
+               ng-model="account.loginName" placeholder="请输入账号" tabindex="1"/>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="control-label">密码</label>
+        <a ng-href="/forgot#/password" class="pull-right">忘记密码</a>
+        <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="80" required
+               ng-model="account.password" placeholder="请输入密码" tabindex="2"/>
+      </div>
+
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="keepSigned" id="keepSigned" ng-model="account.keepSigned" tabindex="3"> 下次自动登录
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" tabindex="4">登录</button>
+      </div>
+
+      <div class="form-group">
+        <strong>没有账户？</strong>
+        <a class="btn-link" href="" ng-href="/signup" title="注册">注册</a>
+      </div>
+    </form>
+  </div>
+</div>

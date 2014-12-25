@@ -1,0 +1,210 @@
+<h3 class="page-header">用户信息</h3>
+
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+  </div>
+  <div class="col-md-12">
+    <form class="form-horizontal" name="accountForm" method="post" account-validator>
+      <div class="form-group">
+        <label class="control-label col-sm-3">用户名</label>
+
+        <div class="col-sm-6">
+          <p class="form-control-static">
+            <span ng-bind="account.loginName"></span>
+            <a href="" ng-click="updatePassword();"><strong>修改密码</strong></a>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3">邮箱</label>
+
+        <div class="col-sm-6">
+          <p class="form-control-static">
+            <span ng-bind="account.email"></span>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="name" class="control-label col-sm-3">昵称</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="name" name="name" maxlength="80"
+                 ng-model="account.name"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="englishName" class="control-label col-sm-3">英文名</label>
+
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="englishName" name="englishName" maxlength="80"
+                 ng-model="account.englishName"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sex" class="control-label col-sm-3">性别</label>
+
+        <div class="col-sm-6">
+          <div class="input-group select-box" dropdown is-open="selectBox.sex">
+            <input placeholder="" type="text" class="form-control dropdown-input"
+                   ng-model="account.sex" ng-click="openDropDown($event,'sex');"
+                   id="sex" name="sex" ng-readonly="true">
+
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+              </button>
+            </div>
+            <ul role="menu" class="dropdown-menu">
+              <li>
+                <a href="" ng-click="account.sex='';selectBox.sex=false;">&nbsp;</a>
+              </li>
+              <li>
+                <a href="" ng-click="account.sex='男';selectBox.sex=false;">男</a>
+              </li>
+              <li>
+                <a href="" ng-click="account.sex='女';selectBox.sex=false;">女</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-3">头像</label>
+
+        <div class="col-sm-6">
+          <span title="头像" class="{{account.headPortrait}}"></span>
+          <ul class="head-portrait-list list-unstyled clearfix">
+            <li>
+              <a href="" ng-click="changeHeadPortrait($event,'head-portrait-default');"><span title="头像"
+                                                                                              class="head-portrait-default"></span></a>
+            </li>
+            <li ng-repeat="value in headPortrait">
+              <a href="" ng-click="changeHeadPortrait($event,value);"><span title="头像" class="{{value}}"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="residence" class="control-label col-sm-3">来自</label>
+
+        <div class="col-sm-6">
+          <div class="input-group select-box" dropdown is-open="selectBox.residence">
+            <input placeholder="如果列表中没有您的城市，可直接输入" type="text" class="form-control dropdown-input"
+                   ng-model="account.residence" ng-click="openDropDown($event,'residence');"
+                   id="residence" name="residence" maxlength="80">
+
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+              </button>
+            </div>
+            <ul role="menu" class="dropdown-menu scroll">
+              <li ng-repeat="value in residence">
+                <a href="" ng-click="account.residence=value;selectBox.residence=false;">{{value}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="position" class="control-label col-sm-3">职位</label>
+
+        <div class="col-sm-6">
+          <div class="input-group select-box" dropdown is-open="selectBox.position">
+            <input placeholder="" type="text" class="form-control dropdown-input"
+                   ng-model="account.position" ng-click="openDropDown($event,'position');"
+                   id="position" name="position" ng-readonly="true">
+
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+              </button>
+            </div>
+            <ul role="menu" class="dropdown-menu scroll">
+              <li>
+                <a href="" ng-click="account.position='';selectBox.position=false;">&nbsp;</a>
+              </li>
+              <li ng-repeat="value in position">
+                <a href="" ng-click="account.position=value;selectBox.position=false;">{{value}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="site" class="control-label col-sm-3">个人主页</label>
+
+        <div class="col-sm-6">
+          <input type="url" class="form-control" id="site" name="site" maxlength="80"
+                 ng-model="account.site"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="signature" class="control-label col-sm-3">我的签名</label>
+
+        <div class="col-sm-6">
+          <textarea ng-model="account.signature" name="signature" id="signature" class="form-control" rows="3" maxlength="500"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-6">
+          <button type="submit" class="btn btn-primary">保存个人信息</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/ng-template" id="updatePassword.html">
+  <form class="form-horizontal" name="updatePasswordForm" autocomplete="off" account-password-validator>
+    <div class="modal-header">
+      <button type="button" class="close" ng-click="cancel()" title="Close">&times;</button>
+      <h4 class="modal-title">修改用户密码</h4>
+    </div>
+    <div class="modal-body">
+      <div alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</div>
+      <div class="form-group">
+        <label for="oldPassword" class="control-label col-sm-3"><i class="required">*</i> 原密码</label>
+
+        <div class="col-sm-6">
+          <input type="password" class="form-control" id="oldPassword" name="oldPassword" minlength="6" maxlength="30" required
+                 ng-model="account.oldPassword" placeholder="请输入原密码" autocomplete="off"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="control-label col-sm-3"><i class="required">*</i> 新密码</label>
+
+        <div class="col-sm-6">
+          <input type="password" class="form-control" id="password" name="password" minlength="6" maxlength="30" required
+                 passwordstrategy="true" ng-model="account.password" placeholder="请输入新密码" autocomplete="off"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword" class="control-label col-sm-3"><i class="required">*</i> 确认密码</label>
+
+        <div class="col-sm-6">
+          <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" minlength="6" maxlength="30" required
+                 ng-model="account.confirmPassword" placeholder="请再次输入新密码" autocomplete="off"/>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" ng-disabled="updatePasswordForm.$pristine">修改</button>
+      <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+  </form>
+</script>

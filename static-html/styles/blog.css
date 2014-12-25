@@ -1,0 +1,86 @@
+body {
+    padding-top: 50px;
+}
+
+/**
+* global 全局样式
+**/
+.margin10-TB {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.margin20-L {
+    margin-left: 20px;
+}
+
+.margin10-T {
+    margin-top: 10px;
+}
+
+.footer {
+    background-color: #F5F5F5;
+    height: 60px;
+    width: 100%;
+}
+
+.footer .text-muted {
+    margin: 20px 0;
+}
+
+/**
+ * 修改分享代码样式与bootstrap的冲突
+ * http://www.bshare.cn
+**/
+.bsBox,
+.bsBox *,
+#bsPanelHolder,
+#bsPanelHolder * {
+    box-sizing: content-box;
+}
+
+/**
+ * 博客内容
+**/
+.blog-content {
+    margin-top: 10px;
+}
+
+.blog-content p {
+    line-height: 2em;
+    text-indent: 2em;
+}
+
+.comment > li {
+    margin-top: 30px;
+    padding: 10px;
+    border: 1px dashed #BCE8F1;
+}
+
+.comment > li > ul {
+    margin-left: 60px;
+}
+
+.comment-content {
+    border-radius: 5px;
+    margin: 10px 0;
+    position: relative;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    padding: 1.5em;
+}
+
+.comment-content:before,
+.comment-content:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -1.6em;
+    left: .844em;
+    border: 0.8em solid rgba(0, 0, 0, 0.1);
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+}
+
+.comment-content:after {
+    margin-top: .201em;
+    border-color: transparent transparent #fff transparent;
+}

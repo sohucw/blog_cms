@@ -1,0 +1,40 @@
+body {
+    padding-top: 70px;
+}
+
+.hf-blog {
+    background-color: #428bca;
+    box-shadow: inset 0 -2px 5px rgba(0, 0, 0, .1);
+}
+
+.navbar-default .navbar-brand{
+    font-size: 14px;
+    color: #cdddeb;
+    padding: 15px 20px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{
+    color: #fff;
+}
+.navbar-brand.active {
+    position: relative;
+    color: #fff;
+}
+.navbar-brand.active:after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -5px;
+    vertical-align: middle;
+    content: " ";
+    border-right:  5px solid transparent;
+    border-bottom: 5px solid;
+    border-left:   5px solid transparent;
+}
+
+
+.navbar-default .navbar-nav > li > a{
+    color: #cdddeb;
+}

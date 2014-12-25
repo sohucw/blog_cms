@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ../themes/themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp">
+<% include ../views/common/header.html %>
+<div ng-include="'views/account/terms.html'"></div>
+<% include ../views/common/footer.html %>
+
+<!-- build:js ../scripts/vendor-terms.js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../scripts/terms.js -->
+<script src="../scripts/apps/account/app-terms.js"></script>
+<!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hope Future 博客-爱心捐助</title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ./themes.html %>
+
+</head>
+<body ng-app="hopefutureBlogApp">
+<% include ./views/common/header.html %>
+
+<div class="jumbotron blog-jumbotron">
+  <div class="container hf-paragraph">
+    <h1 class="text-center">Hope Future 博客 - 爱心捐助</h1>
+    <p class="margin-top-vl">Hope Future Blog 系统既可以发表自己的文章，又可以拿来当作参考项目（ <strong><a target="_blank" href="https://github.com/linder0209/hopefuture-blog">源代码</a></strong> ），开发自己的产品或项目。</p>
+    <p>开发本系统花费了我半年多的时间，从系统搭建、系统开发、系统测试再到系统上线，占用了我大部分业余时间。
+      如果您觉得本系统对您的学习有所帮助，请献上您的一份爱心，您的爱心会支撑我继续完成系统的升级开发和日常维护。
+      我也会把开发过程中用到的技术以博文的形式逐步呈现给大家的，同时会发布一些开源项目，方便大家的学习和交流。</p>
+
+    <div class="row text-center">
+      <div class="col-sm-offset-2 col-sm-4">
+        <div>支付宝二维码</div>
+        <img src="images/zhifubao.png" alt="支付宝二维扫码"/>
+        <div>支付宝账户：<strong>hopeblog@126.com</strong></div>
+      </div>
+      <div class="col-sm-4">
+        <div>微信二维码</div>
+        <img src="images/weixin.png" alt="微信二维扫码"/>
+        <div>微信账户：<strong>46371543</strong></div>
+      </div>
+    </div>
+
+    <p class="margin-top-vl">该博客系统采用时下比较前沿的技术来开发，主要基于 <a target="_blank" href="http://www.nodejs.org/">Node.js</a> 来实现的。用到的技术和资源有：</p>
+
+    <ol class="hf-callout hf-callout-info list-unstyled hf-list">
+      <li>
+        Web 前端项目管理：
+        <a target="_blank" href="http://gruntjs.com/">Grunt</a>、
+        <a target="_blank" href="http://bower.io/">Bower</a>、
+        <a target="_blank" href="http://yeoman.io/">Yeoman</a>
+      </li>
+      <li>
+        JavaScript 框架和插件：
+        <a target="_blank" href="http://jquery.com/">jQuery</a>、
+        <a target="_blank" href="https://angularjs.org/">Angular</a>、
+        <a target="_blank" href="http://angular-ui.github.io/bootstrap/">Angular UI Bootstrap</a>、
+        <a target="_blank" href="http://jqueryvalidation.org/">jQuery Validation Plugin</a>、
+        <a target="_blank" href="http://momentjs.com/">Moment.js</a>、
+        <a target="_blank" href="http://underscorejs.org/">Underscore.js</a>、
+        <a target="_blank" href="http://www.tinymce.com/">TinyMCE</a>、
+        <a target="_blank" href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a>
+      </li>
+      <li>
+        Css 框架和工具：
+        <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>、
+        <a target="_blank" href="http://fontawesome.io/">Font Awesome</a>、
+        <a target="_blank" href="http://lesscss.org/">Less</a>
+      </li>
+      <li>
+        Web 开发辅助工具：
+        <a target="_blank" href="http://www.jshint.com/">JSHint</a>、
+        <a target="_blank" href="http://usejsdoc.org/">JSDoc</a>、
+        <a target="_blank" href="http://jasmine.github.io/">Jasmine 单元测试</a>
+      </li>
+      <li>
+        Node.js web application 框架或工具：
+        <a target="_blank" href="http://expressjs.com/">express</a>、
+        <a target="_blank" href="http://www.embeddedjs.com/">ejs</a>、
+        <a target="_blank" href="https://github.com/Gozala/crypto">crypto 加密</a>、
+        <a target="_blank" href="http://www.nodemailer.com">nodemailer</a>
+      </li>
+      <li>
+        数据库：
+        <a target="_blank" href="http://www.mongodb.org/">MongoDB</a>、
+        <a target="_blank" href="http://mongoosejs.com/">Mongoose</a>
+      </li>
+    </ol>
+
+  </div>
+</div>
+
+<% include ./views/common/footer.html %>
+
+<!-- build:js scripts/vendor-donate.js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/donate.js -->
+<script src="scripts/apps/app-hopefuture.js"></script>
+<!-- endbuild -->
+</body>
+</html>

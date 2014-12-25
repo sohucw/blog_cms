@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../app/images/favicon.ico">
+
+  <title>后台管理-文章管理</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../app/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+  <link href="../../app/bower_components/bootstrap/dist/css/lavish-bootstrap.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../styles/blog.css" rel="stylesheet">
+
+  <!-- 临时样式，回头左侧换成菜单实现-->
+  <link href="../styles/dashboard.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand active" href="#">首页</a>
+      <a class="navbar-brand" href="#">文章</a>
+      <a class="navbar-brand" href="#">关于</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">换肤<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">蓝色经典</a></li>
+            <li><a href="#">温馨浪漫</a></li>
+            <li><a href="#">夕阳西下</a></li>
+          </ul>
+        </li>
+        <li><a href="#">登录</a></li>
+        <li><a href="#">注册</a></li>
+        <li><a href="#">欢迎 linder0209</a></li>
+        <li><a href="#">我的博客</a></li>
+        <!-- 这里进入后台管理自己的博客-->
+        <li><a href="#">登出</a></li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</header>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li><a href="#">发表文章</a></li>
+        <li class="active"><a href="#">文章管理</a></li>
+        <li><a href="#">类别管理</a></li>
+        <li><a href="#">评论管理</a></li>
+        <li><a href="#">博客管理</a></li>
+      </ul>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div>
+        <button type="button" class="btn btn-primary" ng-click="deleteAll();">
+          <span class="glyphicon glyphicon-remove"></span> 删除
+        </button>
+        <button type="button" class="btn btn-primary margin10-L" ng-click="create();">
+          <span class="glyphicon glyphicon-plus"></span> 写文章
+        </button>
+      </div>
+      <hr/>
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th><input type="checkbox" ng-model="grid.checked" ng-change="selectAll()"/></th>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Created Date</th>
+          <th>Created By</th>
+          <th>Updated Date</th>
+          <th>Updated By</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items" id="{{item._id}}">
+          <td><input type="checkbox" ng-model="item.checked" ng-change="selectItem()"/></td>
+          <td>{{item.title | truncate:10}}</td>
+          <td>{{item.content | truncate:10}}</td>
+          <td>{{item.createdDate}}</td>
+          <td>{{item.createdBy}}</td>
+          <td>{{item.updatedDate}}</td>
+          <td>{{item.updatedBy}}</td>
+          <td>
+            <a class="glyphicon glyphicon-pencil" href="" ng-click="edit(item._id,$index);"></a>
+            <a class="glyphicon glyphicon-trash" href="" ng-click="delete(item);"></a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<script src="../../app/bower_components/jquery/dist/jquery.js"></script>
+<script src="../../app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+
+</body>
+</html>

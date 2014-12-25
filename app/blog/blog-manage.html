@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <meta name="description" content="">
+  <!-- 兼容性问题，使用浏览器最高版本来渲染-->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <% include ../themes/themes-manage.html %>
+
+  <!-- build:css ../styles/blog-manage.css -->
+  <link rel="stylesheet" href="../bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css"/>
+  <link rel="stylesheet" href="../bower_components/tinymce-syntaxhighlighter/css/plugin.css" />
+  <!-- endbuild -->
+
+</head>
+<body ng-app="hopefutureBlogApp" ng-controller="HopefutureBlogCtrl" start-ajax-loading="true">
+<% include ../views/common/header.html %>
+<div class="container-fluid" ng-controller="BlogManageCtrl">
+
+  <div class="row">
+
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li link-active="active"><a href="" ng-href="#/publish" ng-click="showPublishInfo=false;">写文章</a></li>
+        <li link-active="active"><a href="" ng-href="#/articles">文章管理</a></li>
+        <li link-active="active"><a href="" ng-href="#/category">分类管理</a></li>
+        <li link-active="active"><a href="" ng-href="#/label">标签管理</a></li>
+        <li link-active="active"><a href="" ng-href="#/comment">评论管理</a></li>
+        <li link-active="active"><a href="" ng-href="#/resource">资源链接</a></li>
+        <li link-active="active"><a href="" ng-href="#/setting">博客设置</a></li>
+        <li link-active="active"><a href="" ng-href="#/accountInfo">用户信息</a></li>
+        <% if (locals.administrator) { %>
+        <li link-active="active"><a href="" ng-href="#/account">用户管理</a></li>
+        <% } %>
+
+        <% if (locals.manager) { %>
+        <li link-active="active"><a href="" ng-href="#/audit">文章审核</a></li>
+        <% } %>
+
+      </ul>
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 blog-manage-main" ng-view>
+
+    </div>
+  </div>
+  <!-- /.row -->
+</div>
+<!-- /.container -->
+
+<% include ../views/common/manage-footer.html %>
+
+<!-- build:js ../scripts/vendor-blog-manage.js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-route/angular-route.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/jquery-validation/dist/jquery.validate.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- TinyMCE -->
+<script src="../bower_components/tinymce/tinymce.jquery.js"></script>
+<script src="../scripts/components/tinymce/langs/zh_CN.js"></script>
+<script src="../bower_components/tinymce-syntaxhighlighter/plugin.js"></script>
+<script src="../bower_components/tinymce-syntaxhighlighter/langs/zh_CN.js"></script>
+<script src="../bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+
+<!-- datetimepicker -->
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/moment/locale/zh-cn.js"></script>
+<script src="../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<!--校验国际化 -->
+<script src="../bower_components/jquery-validation/src/localization/messages_zh.js"></script>
+<!-- endbuild -->
+
+<!-- build:js ../scripts/blog-manage.js -->
+<script src="../scripts/hopefuture/hopefuture.js"></script>
+<script src="../scripts/hopefuture/hf_collection.js"></script>
+<script src="../scripts/hopefuture/hf_validate.js"></script>
+<script src="../scripts/apps/blog/app-blog-manage.js"></script>
+
+<script src="../scripts/services/httpInterceptor.js"></script>
+<script src="../scripts/services/service-hopefuture-blog.js"></script>
+<script src="../scripts/services/errorCodes.js"></script>
+<script src="../scripts/services/blogmanage/service-article.js"></script>
+<script src="../scripts/services/blogmanage/service-category.js"></script>
+<script src="../scripts/services/blogmanage/service-comment.js"></script>
+<script src="../scripts/services/blogmanage/service-label.js"></script>
+<script src="../scripts/services/blogmanage/service-publish.js"></script>
+<script src="../scripts/services/blogmanage/service-setting.js"></script>
+<script src="../scripts/services/blogmanage/service-resource.js"></script>
+<script src="../scripts/services/account/account-constant.js"></script>
+<script src="../scripts/services/account/service-account-info.js"></script>
+
+<script src="../scripts/controllers/controller-common.js"></script>
+<script src="../scripts/controllers/controller-hopefuture-blog.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-blog-manage.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-article.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-category.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-comment.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-label.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-publish.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-setting.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-resource.js"></script>
+<script src="../scripts/controllers/account/controller-account-info.js"></script>
+
+<script src="../scripts/directives/blogmanage/directive-link-active.js"></script>
+<script src="../scripts/directives/blogmanage/directive-publish.js"></script>
+<script src="../scripts/directives/blogmanage/directive-category.js"></script>
+<script src="../scripts/directives/blogmanage/directive-label.js"></script>
+<script src="../scripts/directives/blogmanage/directive-resource.js"></script>
+<script src="../scripts/directives/account/directive-account-info.js"></script>
+
+<script src="../scripts/filters/filter-truncate.js"></script>
+<script src="../scripts/filters/filter-common.js"></script>
+<!-- endbuild -->
+
+<% if (locals.administrator) { %>
+<!-- build:js ../scripts/blog-manage-administrator.js -->
+<script src="../scripts/services/account/service-account.js"></script>
+<script src="../scripts/controllers/account/controller-account.js"></script>
+<!-- endbuild -->
+<% } %>
+
+<% if (locals.manager) { %>
+<!-- build:js ../scripts/blog-manage-manager.js -->
+<script src="../scripts/services/blogmanage/service-audit.js"></script>
+<script src="../scripts/controllers/blogmanage/controller-audit.js"></script>
+<!-- endbuild -->
+<% } %>
+
+</body>
+</html>

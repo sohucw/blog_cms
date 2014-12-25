@@ -1,0 +1,158 @@
+//博客（个人博客）主页面
+.blog-container {
+  margin-top: @margin-md;
+  margin-bottom: @margin-hg;
+}
+
+//个人博客首页左侧样式
+.blog-container{
+  .section{
+    padding: 0 @padding-md;
+  }
+}
+
+//个人博客首页右侧样式
+.article-aside-panel{
+  background-color: @gray-lighter;
+  padding: @padding-lg @padding-md;
+}
+
+@media (min-width: 768px) {
+  .blog-container{
+    .section{
+      padding: 0 @padding-lg;
+    }
+  }
+  .article-aside-panel{
+    padding: @padding-lg @padding-lg;
+  }
+}
+
+//写在下面当屏幕最小宽度大于等于 992px时会应用该样式
+@media (min-width: 992px) {
+  .blog-container{
+    .section{
+      padding: 0 @padding-vl;
+    }
+  }
+  .article-aside-panel{
+    padding: @padding-lg @padding-vl;
+  }
+}
+
+@media (min-width: 1200px) {
+  .blog-container{
+    .section{
+      padding: 0 @padding-hg;
+    }
+  }
+  .article-aside-panel{
+    padding: @padding-lg @padding-vl;
+  }
+}
+
+.article-aside {
+  margin-top: @margin-hg;
+}
+
+.article-list-aside {
+  > li {
+    margin-bottom: @margin-md;
+  }
+  .fa {
+    margin-right: @margin-sm;
+  }
+}
+
+.masthead-button-links {
+  margin-top: @margin-vl;
+  a + a {
+    margin-left: @margin-lg;
+  }
+}
+
+.article-list {
+  background-color: lighten(@body-bg, 10%);
+  /*background-color: #fff;*/
+  border: 1px solid darken(@brand-primary, 15%);
+  .box-shadow(0 0 5px);
+  border-radius: 5px;
+  margin-bottom: @margin-vl;
+  padding: 10px 20px;
+  > section {
+    margin-bottom: @margin-lg;
+    > p {
+      line-height: 2em;
+      text-indent: 2em;
+      font-size: @font-size-medium;
+    }
+  }
+}
+
+//热点文章 pagination
+.boutique-pagination {
+  background-color: @gray-lighter;
+
+  > li > a,
+  > li > span {
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: 0;
+    border: 0 none;
+  }
+
+  > li > a:hover,
+  > li > a:focus {
+    border: 0 none;
+  }
+
+  > li > span,
+  > li > span:hover,
+  > li > span:focus {
+    border-left: 1px solid @brand-primary;
+    border-right: 1px solid @brand-primary;
+  }
+
+  > li > a > i.fa {
+    font-size: 4em;
+    height: 72px;
+    line-height: 72px;
+    padding: 0 25px;
+  }
+
+  > li > span {
+    padding: 0 25px;
+  }
+
+  > li > span.page-number {
+    height: 92px;
+    line-height: 92px;
+  }
+}
+
+.article-meta > ul > li {
+  float: left;
+  margin-right: @margin-lg;
+  > a + a {
+    margin-left: @margin-md;
+  }
+}
+
+.element-list > a {
+  display: inline-block;
+  margin-right: @margin-md;
+  padding: @padding-sm 0;
+}
+
+.resource-list {
+  .resource-item {
+    .link > a {
+      float: left;
+      padding: @padding-sm 0;
+      margin-right: @margin-lg;
+    }
+  }
+}
+
+.blog-jumbotron{
+  margin-bottom: 0;
+}
